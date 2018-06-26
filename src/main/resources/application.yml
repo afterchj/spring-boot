@@ -1,0 +1,23 @@
+spring:
+  datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.51.75:3306/test?useUnicode=true&characterEncoding=utf8
+      password: root
+      username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    host: 192.168.51.75
+    port: 6379
+    database: 1
+
+my:
+    name: after
+    age: 23
+    number: ${random.int}
+    uuid: ${random.uuid}
+    max: ${random.int(10)}
+    value: ${random.value}
+    greeting: Hi,I'm ${my.name}
