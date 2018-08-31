@@ -1,3 +1,4 @@
+
 spring:
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
@@ -12,12 +13,24 @@ spring:
     host: 192.168.51.75
     port: 6379
     database: 1
-
+  profiles:
+    active: dev
+  http:
+    encoding:
+      charset: utf-8
+      force: true
 my:
     name: after
     age: 23
+    msg: Test is ok
     number: ${random.int}
     uuid: ${random.uuid}
     max: ${random.int(10)}
     value: ${random.value}
     greeting: Hi,I'm ${my.name}
+logging:
+  file: /mnt/spring-boot/log.log
+server:
+  servlet:
+    context-path: /helloboot
+#debug: true

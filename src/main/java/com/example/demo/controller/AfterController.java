@@ -14,9 +14,12 @@ public class AfterController {
     private String name;
     @Value("${my.age}")
     private int age;
+    @Value("${my.greeting}")
+    private String hello;
 
     @RequestMapping("/after")
     public String after() {
-        return name + ":" + age;
+
+        return name + ":" + age + "." + hello;
     }
 }
