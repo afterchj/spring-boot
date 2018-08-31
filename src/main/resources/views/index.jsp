@@ -11,7 +11,7 @@
     })
 </script>
 <body>
-<h1>Welcome come to Spring MVC world!</h1>
+<h1>Welcome come to Spring Boot world!</h1>
 <p id="show"></p>
 </body>
 </html>

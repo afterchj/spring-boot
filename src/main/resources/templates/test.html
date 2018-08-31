@@ -1,0 +1,60 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link th:href="@{/static/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/static/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>name</td>
+            <td>score</td>
+            <td>sex</td>
+            <td>grade</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="test:${test}">
+        <td th:text="${test.name}"></td>
+        <td th:text="${test.score}"></td>
+        <td th:if="${test.male} eq 1">男</td>
+        <td th:if="${test.male} eq 2">女</td>
+        <td th:if="${test.male} eq 3">未知</td>
+        <!--判断成绩-->
+        <td th:if="${test.score} gt 0 and ${test.score} lt 60">差</td>
+        <td th:if="${test.score} ge 60 and ${test.score} le 70">中</td>
+        <td th:if="${test.score} gt 70 and ${test.score} le 80">良</td>
+        <td th:if="${test.score} gt 80 and ${test.score} le 90">优</td>
+        <td th:if="${test.score} gt 90 and ${test.score} le 100">超级优秀</td>
+    </tr>
+    <tr th:each="test:${test}">
+        <td th:text="${test.name}"></td>
+        <td th:text="${test.score}"></td>
+        <td th:text="${test.male}"></td>
+        <!--判断成绩   一般只有两种情况的时候可以使用这种方式-->
+        <td th:if="${test.score} gt 0 and ${test.score} lt 60">差</td>
+        <!--除了这些条件之外的-->
+        <td th:unless="${test.score} gt 0 and ${test.score} lt 60">及格</td>
+    </tr>
+    <tr th:each="test:${test}">
+        <td th:text="${test.name}"></td>
+        <td th:text="${test.score}"></td>
+        <td th:switch="${test.male}">
+            <span th:case="1">男</span>
+            <span th:case="2">女</span>
+            <!--其他情况-->
+            <span th:case="*">未知</span>
+        </td>
+        <td th:if="${test.score} gt 0 and ${test.score} lt 30">超级差</td>
+        <!--除了这些条件之外的-->
+        <td th:unless="${test.score} gt 0 and ${test.score} lt 60">优良</td>
+    </tr>
+    </tbody>
+</table>
+<div th:include="/foot :: footer"></div>
+</body>
+</html>

@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link th:href="@{/static/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/static/bootstrap/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+    <script th:src="@{/static/jquery.js}" type="text/javascript"></script>
 </head>
+<script type="text/javascript">
+    $(function () {
+        $("#show").html("jquery文件加载成功！");
+    })
+</script>
 <body>
-<h1>Hello World!<label style="color: deepskyblue" th:text="${ctx}"></label></h1>
-<a th:href="@{/home/person}">首页</a><br>
-<h3>
-    ctx: [(${ctx})]
-</h3>
+<h1>Welcome come to Spring Boot world!</h1>
+<p id="show"></p>
 </body>
 </html>
