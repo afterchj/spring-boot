@@ -18,7 +18,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    InfoService infoService;
+    private InfoService infoService;
 
     @GetMapping("/name/{userName}")
     public Info getInfo(@PathVariable("userName") String userName) {

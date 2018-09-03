@@ -1,10 +1,13 @@
-
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.demo.entity
 spring:
   datasource:
       driver-class-name: com.mysql.jdbc.Driver
       url: jdbc:mysql://192.168.51.75:3306/test?useUnicode=true&characterEncoding=utf8
       password: root
       username: root
+      type: com.alibaba.druid.pool.DruidDataSource
   jpa:
     hibernate:
       ddl-auto: update
@@ -30,7 +33,7 @@ my:
     greeting: Hi,I'm ${my.name}
 logging:
   file: /mnt/spring-boot/log.log
-server:
-  servlet:
-    context-path: /helloboot
+#server:
+#  servlet:
+#    context-path: /helloboot
 #debug: true

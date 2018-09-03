@@ -19,7 +19,6 @@ public class AfterController {
 
     @RequestMapping("/after")
     public String after() {
-
         return name + ":" + age + "." + hello;
     }
 }

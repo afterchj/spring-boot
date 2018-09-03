@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.interceptor.DemoInterceptor;
+import com.example.demo.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -14,16 +15,23 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+
     @Bean
     public DemoInterceptor demoInterceptor() {
         return new DemoInterceptor();
     }
 
+    @Bean
+    public UserService userService() {
+        return new UserService();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(demoInterceptor()).excludePathPatterns("/static/**","/error");
+        registry.addInterceptor(demoInterceptor()).excludePathPatterns("/static/**", "/", "/error");
 
     }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
@@ -32,5 +40,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("index");
+        registry.addViewController("/ws").setViewName("/ws");
+        registry.addViewController("/login").setViewName("/login");
+        registry.addViewController("/chat").setViewName("/chat");
     }
 }

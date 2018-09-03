@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Person;
+import com.example.demo.entity.PersonVo;
 import com.example.demo.entity.TestVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +21,10 @@ public class HomeController {
     @RequestMapping(value = "/person")
     public String hello(Model model) {
 
-        Person single = new Person("after", 23);
-        List<Person> people = new ArrayList<>();
+        PersonVo single = new PersonVo("after", 23);
+        List<PersonVo> people = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            Person p = new Person("test" + i, (i + 20));
+            PersonVo p = new PersonVo("test" + i, (i + 20));
             people.add(p);
         }
         model.addAttribute("singlePerson", single);

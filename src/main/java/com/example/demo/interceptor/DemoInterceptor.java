@@ -25,10 +25,9 @@ public class DemoInterceptor extends HandlerInterceptorAdapter {
         request.removeAttribute("startTime");
         String requestUri = request.getRequestURI();
         String contextPath = request.getContextPath();
-        if (requestUri.startsWith(contextPath)) {
-            System.out.println("requestUri=" + requestUri + "\tcontextPath=" + contextPath + ".");
-            requestUri = requestUri.substring(contextPath.length(), requestUri.length());
+        requestUri = requestUri.substring(contextPath.length(), requestUri.length());
+        if (!requestUri.endsWith(".js")) {
+            System.out.println("url=" + requestUri + "，请求处理时间为" + (System.currentTimeMillis() - startTime));
         }
-        System.out.println("url=" + requestUri + "，请求处理时间为" + (System.currentTimeMillis() - startTime));
     }
 }

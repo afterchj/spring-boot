@@ -3,11 +3,11 @@ package com.example.demo.entity;
 /**
  * Created by hongjian.chen on 2018/8/30.
  */
-public class Person {
+public class PersonVo {
     private String name;
     private int age;
 
-    public Person(String name, int age) {
+    public PersonVo(String name, int age) {
         this.name = name;
         this.age = age;
     }
