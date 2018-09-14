@@ -1,54 +1,47 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.PersonVo;
-import com.example.demo.entity.TestVo;
+
+import com.alibaba.fastjson.JSON;
+import com.example.demo.dao.SysUserRepository;
+import com.example.demo.entity.Msg;
+import com.example.demo.entity.SysUser;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-/**
- * Created by hongjian.chen on 2018/8/24.
- */
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 
 @Controller
-@RequestMapping(value = "/home")
 public class HomeController {
-    @RequestMapping(value = "/person")
-    public String hello(Model model) {
 
-        PersonVo single = new PersonVo("after", 23);
-        List<PersonVo> people = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            PersonVo p = new PersonVo("test" + i, (i + 20));
-            people.add(p);
-        }
-        model.addAttribute("singlePerson", single);
-        model.addAttribute("people", people);
+    @Autowired
+    private SysUserRepository userRepository;
+
+    @RequestMapping("/show")
+    public String index(HttpServletRequest request, Authentication authentication, Model model) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        System.out.println("User has authorities: " + JSON.toJSONString(userDetails.getAuthorities()));
+        Principal principal = request.getUserPrincipal();
+        System.out.println("username:" + principal.getName());
+        Msg msg = new Msg("测试标题", "测试内容", "额外信息，只对管理员显示");
+        model.addAttribute("msg", msg);
+        model.addAttribute("username", principal.getName());
         return "home";
     }
 
-    @RequestMapping("/index")
-    public String index() {
-        return "index";
-    }
-
-    @RequestMapping("/footer")
-    public String showFoot() {
-        return "foot";
-    }
-
-    @RequestMapping("/test")
-    public String test(ModelMap map) {
-        List<TestVo> testVos = new ArrayList<>();
-        testVos.add(new TestVo("测试员", 10, new Date(), 1));
-        testVos.add(new TestVo("管理员", 70, new Date(), 2));
-        testVos.add(new TestVo("监考官", 100, new Date(), 3));
-        map.put("test", testVos);
-        return "test";
+    @ResponseBody
+    @RequestMapping(value = "/registry")
+    public String register(SysUser user) {
+        user.setUsername(user.getUsername());
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        System.out.println("user:" + user.getUsername());
+        userRepository.save(user);
+        return "ok";
     }
 }
