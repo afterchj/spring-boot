@@ -17,7 +17,7 @@ public class CustomUserService implements UserDetailsService { //1
     public UserDetails loadUserByUsername(String username) { //2
 
         SysUser user = userRepository.findByUsername(username);
-        System.out.println(JSON.toJSONString(user));
+        System.out.println("user="+JSON.toJSONString(user));
         if (user == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }
