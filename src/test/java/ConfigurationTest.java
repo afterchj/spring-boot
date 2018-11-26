@@ -142,7 +142,7 @@ public class ConfigurationTest {
         for (String key : people.keySet()) {
             list.add(key);
         }
-        redisTemplate.opsForHash().putAll("peopleHash", people);
+//        redisTemplate.opsForHash().putAll("peopleHash", people);
         System.out.println(JSON.toJSONString(redisTemplate.opsForHash().multiGet("peopleHash", list)));
 
     }

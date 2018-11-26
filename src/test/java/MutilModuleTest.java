@@ -8,7 +8,7 @@ public class MutilModuleTest {
 
     @Test
     public void test() {
-        MultiModuleDemo mutilModuleDemo = new MultiModuleDemo();
-        System.out.println(mutilModuleDemo.moduleInfo());
+        MultiModuleDemo multiModuleDemo = new MultiModuleDemo();
+        System.out.println(multiModuleDemo.moduleInfo());
     }
 }
