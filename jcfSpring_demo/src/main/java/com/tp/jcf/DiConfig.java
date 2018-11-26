@@ -67,8 +67,8 @@ public class DiConfig implements AsyncConfigurer{
         System.out.println(osName);
         System.out.println(IOUtils.toString(testUrl.getInputStream()));
         System.out.println("testFile----->"+testFile.getDescription());
-        System.out.println(bookName);
-        System.out.println(environment.getProperty("book.author"));
+        System.out.println("bookName="+bookName);
+        System.out.println("book.author="+environment.getProperty("book.author"));
     }
 
     @Bean

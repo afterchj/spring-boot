@@ -19,7 +19,7 @@ public class SecheduleTaskService {
         System.out.println("每个5秒执行一次 " + DATE_FORMAT.format(new Date()));
     }
 
-    @Scheduled(cron = "0 57 10 ? * *")
+    @Scheduled(cron = "0 47 10 ? * *")
     public void fixTimeExcute() {
         System.out.println("在指定时间执行 " + DATE_FORMAT.format(new Date()));
     }

@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = MyMvcConfig.class)
-@WebAppConfiguration("src/main/resource")
+@WebAppConfiguration
 public class TestMybatis {
     private MockMvc mockMvc;
     @Autowired
