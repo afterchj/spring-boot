@@ -2,8 +2,10 @@ import com.alibaba.fastjson.JSON;
 
 import com.tp.demo.config.DBConfig;
 import com.tp.demo.config.SpringConfig;
+import com.tp.demo.dao.UserDao;
 import com.tp.demo.model.Person;
 import com.tp.demo.model.Pid;
+import com.tp.demo.model.User;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.junit.Test;
@@ -41,7 +43,9 @@ public class ConfigurationTest {
     @Test
     public void testSql() {
         List <Pid> list = sessionTemplate.selectList("tbk.getPids");
-        System.out.println(list.size());
+        List <User> users = sessionTemplate.getMapper(UserDao.class).getAll();
+        System.out.println("users=\n" + JSON.toJSONString(users));
+        System.out.println("pids=\n" + JSON.toJSONString(list));
     }
 
     @Test
