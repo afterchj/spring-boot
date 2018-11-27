@@ -1,11 +1,14 @@
 import com.alibaba.fastjson.JSON;
 
+import com.tp.demo.config.DBConfig;
 import com.tp.demo.config.SpringConfig;
 import com.tp.demo.model.Person;
+import com.tp.demo.model.Pid;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,7 +25,7 @@ import java.util.concurrent.TimeoutException;
  * Created by hongjian.chen on 2018/11/26.
  */
 
-@ContextConfiguration(classes = {SpringConfig.class})
+@ContextConfiguration(classes = {SpringConfig.class, DBConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ConfigurationTest {
 
@@ -30,12 +33,20 @@ public class ConfigurationTest {
     private XMemcachedClient xMemcachedClient;
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate <String, Object> redisTemplate;
 
+    @Autowired
+    private SqlSessionTemplate sessionTemplate;
+
+    @Test
+    public void testSql() {
+        List <Pid> list = sessionTemplate.selectList("tbk.getPids");
+        System.out.println(list.size());
+    }
 
     @Test
     public void testXmemcached() throws InterruptedException, MemcachedException, TimeoutException {
-        List<Person> list = new ArrayList<>();
+        List <Person> list = new ArrayList <>();
         Person person = new Person();
         person.setName("after");
         person.setAddress("苏州");
@@ -53,7 +64,7 @@ public class ConfigurationTest {
         list.add(person2);
 //        xMemcachedClient.set("person1", 24 * 60 * 60, person);
 //        xMemcachedClient.set("people", 24 * 60 * 60, list);
-        List<Person> people = xMemcachedClient.get("people");
+        List <Person> people = xMemcachedClient.get("people");
         for (Person p : people) {
             System.out.println(p.toJsonString());
         }
@@ -123,17 +134,17 @@ public class ConfigurationTest {
         person2.setName("test");
         person2.setAddress("苏州");
         person2.setAge(23);
-        Map<String, Person> people = new HashMap();
+        Map <String, Person> people = new HashMap();
         people.put("key1", person);
         people.put("key2", person1);
         people.put("key3", person2);
 
 
-        Map<String, String> map = new HashMap();
+        Map <String, String> map = new HashMap();
         map.put("key1", "aaa");
         map.put("key2", "bbb");
         map.put("key3", "ccc");
-        Map<String, String> map1 = new HashMap();
+        Map <String, String> map1 = new HashMap();
         map1.put("key4", "111");
         map1.put("key5", "222");
         map1.put("key6", "333");
