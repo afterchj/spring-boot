@@ -12,10 +12,16 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * Created by hongjian.chen on 2018/11/27.
@@ -26,17 +32,38 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 @PropertySource("classpath:application.properties")
 public class DBConfig implements TransactionManagementConfigurer {
 
-    private String driverClassName = "com.mysql.jdbc.Driver";
-    private String jdbc_url = "jdbc:mysql://10.10.11.80:3306/uic";
-    private String username = "ccy";
-    private String password = "ccy";
-    private int maxActive = 20;
-    private int maxIdle = 8;
-    private long maxWait = 100;
+    private static String driverClassName;
+    private static String jdbc_url;
+    private static String username;
+    private static String password;
+    private static int maxActive;
+    private static int maxIdle;
+    private static long maxWait;
+
+    static {
+        InputStream inputStream = DBConfig.class.getClassLoader().getResourceAsStream("application.properties");
+        Properties p = new Properties();
+        try {
+            p.load(inputStream);
+            driverClassName = (String) p.get("driverClassName");
+            jdbc_url = (String) p.get("jdbc_url");
+            username = (String) p.get("username");
+            password = (String) p.get("password");
+            maxActive = Integer.parseInt((String) p.get("maxActive"));
+            maxIdle = Integer.parseInt((String) p.get("maxIdle"));
+            maxWait = Long.parseLong((String) p.get("maxWait"));
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Override
+    public PlatformTransactionManager annotationDrivenTransactionManager() {
+        return new DataSourceTransactionManager(dataSource());
+    }
 
     @Bean(name = "myDateSource")
     public BasicDataSource dataSource() {
-
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(jdbc_url);
@@ -49,18 +76,10 @@ public class DBConfig implements TransactionManagementConfigurer {
         dataSource.setTestOnBorrow(true);
         return dataSource;
     }
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
-
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
 
     @Bean(name = "mySqlSessionFactory")
     public SqlSessionFactory sqlSessionFactoryBean() {
+
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         bean.setDataSource(dataSource());
