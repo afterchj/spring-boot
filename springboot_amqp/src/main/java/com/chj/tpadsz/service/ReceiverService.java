@@ -11,7 +11,17 @@ import org.springframework.stereotype.Service;
 public class ReceiverService {
 
     @JmsListener(destination = "test-destination")
-    public void receiverMessage(String message) {
-        System.out.println("接收到：<" + message + ">");
+    public void receiverMessage1(String message) {
+        System.out.println("接收到test-destination消息：" + message);
+    }
+
+    @JmsListener(destination = "com.tpadsz.uic.queue.myEmail")
+    public void receiverMessage2(String message) {
+        System.out.println("接收到com.tpadsz.uic.queue.myEmail消息：" + message);
+    }
+
+    @JmsListener(destination = "queue://com.tpadsz.uic.queue.myEmail")
+    public void receiverMessage3(String message) {
+        System.out.println("接收到queue://com.tpadsz.uic.queue.myEmail消息：" + message);
     }
 }
