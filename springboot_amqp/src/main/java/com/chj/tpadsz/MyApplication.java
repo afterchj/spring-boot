@@ -1,6 +1,8 @@
 package com.chj.tpadsz;
 
 import com.chj.tpadsz.component.Msg;
+import com.chj.tpadsz.convent.InnerMessageConverter;
+import com.chj.tpadsz.convent.JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,9 +19,12 @@ public class MyApplication implements CommandLineRunner {
     @Autowired
     private JmsTemplate template;
 
+
     public static void main(String[] args) {
         SpringApplication.run(MyApplication.class,args);
     }
+
+
 
     @Override
     public void run(String... strings) throws Exception {
