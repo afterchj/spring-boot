@@ -39,7 +39,8 @@ public class Constants {
 	public static final int ACTIVATED = 1;
 	
 	public static final int NOT_ACTIVATED = 0;
-	
+
+	public static final String APPID_MSG=PROPERTIES_LOADER.getProperty("message.sender.appid12.msg");
 	public static final Integer MESSAGE_THREADNUM = PROPERTIES_LOADER.getInteger("message.sender.threadnum");
 	public static final String MESSAGE_SPCODE = PROPERTIES_LOADER.getProperty("message.sender.spcode");
 	public static final String MESSAGE_SEND_URL = PROPERTIES_LOADER.getProperty("message.sender.url");

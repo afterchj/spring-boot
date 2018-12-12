@@ -11,3 +11,5 @@ memcache:
   nagel: false
   socketTO: 3000
   aliveCheck: true
+server:
+  port: 8086
