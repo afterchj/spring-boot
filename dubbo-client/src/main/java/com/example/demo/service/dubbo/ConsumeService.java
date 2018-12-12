@@ -19,12 +19,6 @@ public class ConsumeService {
     @Reference(version = "0.5.0")
     RecordBillService recordBillService2;
 
-    @Reference(version = "0.4.0")
-    RecordBillService recordBillService0;
-
-    public Map test0() {
-        return (Map) recordBillService0.getByDeviceId("dev_7777");
-    }
 
     public Map test1() {
         return (Map) recordBillService1.getByDeviceId("dev_1111");

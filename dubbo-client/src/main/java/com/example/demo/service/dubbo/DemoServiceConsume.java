@@ -20,6 +20,13 @@ public class DemoServiceConsume {
     @Reference(version = "2.0.0")
     DemoService demoService2;
 
+    @Reference(version = "0.4.0")
+    RecordBillService recordBillService0;
+
+    public Map test0() {
+        return (Map) recordBillService0.getByDeviceId("dev_7777");
+    }
+
 
     public String test1() {
         return demoService1.version("1");
