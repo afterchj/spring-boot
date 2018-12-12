@@ -29,7 +29,7 @@ public class TestController {
         }
         model.addAttribute("singlePerson", single);
         model.addAttribute("people", people);
-        return "home";
+        return "person";
     }
 
     @RequestMapping("/index")
