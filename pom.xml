@@ -6,11 +6,7 @@
     <groupId>com.example</groupId>
     <artifactId>spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>springboot_amqp</module>
-        <module>springboot_rabbitmq</module>
-    </modules>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <description>Demo project for Spring Boot</description>
 
