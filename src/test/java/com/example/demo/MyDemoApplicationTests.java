@@ -53,7 +53,8 @@ public class MyDemoApplicationTests {
 
     @Test
     public void testRedis() {
-        redisDao.setKey("name", "after");
+        redisDao.setKey("name", "admin.chen");
         redisDao.setKey("age", "23");
+        System.out.println("redis test="+redisDao.getValue("name"));
     }
 }
