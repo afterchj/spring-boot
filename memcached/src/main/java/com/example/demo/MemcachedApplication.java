@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.tpadsz.uic.user.api.ValidationManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

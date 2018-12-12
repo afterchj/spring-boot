@@ -14,7 +14,7 @@ public class ValidationMessageSender {
 
     //	@Before
     public static void init(){
-        Mockito.when(invitation.getValue()).thenReturn("12345");
+        Mockito.when(invitation.getValue()).thenReturn("123456");
         Mockito.when(invitation.getKey()).thenReturn("register_18170756879");
         Mockito.when(invitation.getFormatter()).thenReturn("%s（天天锁屏手机动态验证码）为了您的账号安全，验证码请勿转发给他人。");
         messageSender = new BasicMessageSender(invitation);
