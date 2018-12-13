@@ -128,6 +128,7 @@ public class MemcacheConfiguration {
 
     @Bean
     public XMemcachedClient xMemcachedClient() throws IOException {
+        System.out.println("servers[0]"+servers[0]);
         XMemcachedClientBuilder builder = new XMemcachedClientBuilder(AddrUtil.getAddresses(servers[0]));
         XMemcachedClient xMemcachedClient = null;
         // 默认是采用余数哈希，可以修改为一致性哈希

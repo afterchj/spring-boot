@@ -1,8 +1,8 @@
 ## Memcache ���� ##
 memcache:
-  host: 119.3.49.192
+  host: 10.10.11.85
   port: 12000
-  servers: 119.3.49.192:12000
+  servers: 10.10.11.85:12000
   failover: true
   initConn: 100
   minConn: 20
@@ -13,3 +13,16 @@ memcache:
   aliveCheck: true
 server:
   port: 8086
+## Dubbo 服务提供者配置
+spring:
+  dubbo:
+    application:
+      name: memcache-server-provider
+    registry:
+      protocol: zookeeper
+      address: 10.10.11.81:2181,10.10.11.68:2181,10.10.11.90:2181
+    protocol:
+      name: dubbo
+      port: 20960
+    scan: com.example.demo.service.impl
+
