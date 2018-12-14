@@ -10,12 +10,14 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class DubboClientApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx =SpringApplication.run(DubboClientApplication.class, args);
-        MsgServiceConsume sendService=ctx.getBean(MsgServiceConsume.class);
+        ConfigurableApplicationContext ctx = SpringApplication.run(DubboClientApplication.class, args);
+        MsgServiceConsume sendService = ctx.getBean(MsgServiceConsume.class);
         String value = null;
         try {
+//            String code = sendService.updateCheckOut("9", "18550791817");
+//            System.out.println("code=" + code);
             value = sendService.checkValidation("123456", "18550791817");
-        } catch (InvalidCodeException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         System.out.println("value=" + value);
