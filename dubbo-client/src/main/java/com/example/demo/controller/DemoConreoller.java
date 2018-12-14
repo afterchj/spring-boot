@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.DemoService;
-import com.example.demo.service.dubbo.ConsumeService;
 import com.example.demo.service.dubbo.DemoServiceConsume;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

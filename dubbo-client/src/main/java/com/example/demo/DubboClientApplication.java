@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import com.alibaba.fastjson.JSON;
 import com.example.demo.exception.InvalidCodeException;
-import com.example.demo.service.dubbo.ConsumeService;
-import com.example.demo.service.dubbo.DemoServiceConsume;
 import com.example.demo.service.dubbo.MsgServiceConsume;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
