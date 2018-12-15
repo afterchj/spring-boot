@@ -1,7 +1,10 @@
 package com.example.demo;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.constants.MemcachedObjectType;
+import com.example.demo.constants.MobileVerifyType;
 import com.example.demo.entity.Person;
+import com.example.demo.service.MsgSendService;
 import com.whalin.MemCached.MemCachedClient;
 import net.rubyeye.xmemcached.XMemcachedClient;
 import net.rubyeye.xmemcached.exception.MemcachedException;
@@ -26,6 +29,15 @@ public class MemcachedApplicationTests {
     @Autowired
     private XMemcachedClient xMemcachedClient;
 
+    @Autowired
+    private MsgSendService sendService;
+
+    @Test
+    public void testSend() throws Exception {
+        String code = sendService.updateCheckOut("12", "18170756879");
+        System.out.println("code=" + code);
+    }
+
     @Test
     public void contextLoads() throws InterruptedException {
         // 放入缓存
@@ -48,10 +60,18 @@ public class MemcachedApplicationTests {
         System.out.println("b=" + b);
     }
 
+    @Test
+    public void testCode() throws InterruptedException, MemcachedException, TimeoutException {
+        String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), MobileVerifyType.UPDATE.getValue() + "18170756879");
+//        xMemcachedClient.set(key, MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getExpiredTime(), "123456");
+        String value=xMemcachedClient.get(key);
+        System.out.println(value);
+    }
 
     @Test
     public void testXmemcached() throws InterruptedException, MemcachedException, TimeoutException {
-        List <Person> list = new ArrayList <>();
+        System.out.println("xMemcachedClient=" + xMemcachedClient);
+        List<Person> list = new ArrayList<>();
         Person person = new Person();
         person.setName("after");
         person.setAddress("苏州");
@@ -67,9 +87,9 @@ public class MemcachedApplicationTests {
         person2.setAddress("苏州");
         person2.setAge(23);
         list.add(person2);
-//        xMemcachedClient.set("person1", 24 * 60 * 60, person);
+        xMemcachedClient.set("person1", 24 * 60 * 60, person);
         xMemcachedClient.set("people", 24 * 60 * 60, list);
-        List <Person> people = xMemcachedClient.get("people");
+        List<Person> people = xMemcachedClient.get("people");
         for (Person p : people) {
             System.out.println(p.toJsonString());
         }
