@@ -64,7 +64,7 @@ public class MemcachedApplicationTests {
     public void testCode() throws InterruptedException, MemcachedException, TimeoutException {
         String key = String.format(MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getPrefix(), MobileVerifyType.UPDATE.getValue() + "18170756879");
 //        xMemcachedClient.set(key, MemcachedObjectType.CACHE_MESSAGE_VERIFICATION.getExpiredTime(), "123456");
-        String value=xMemcachedClient.get(key);
+        String value = xMemcachedClient.get(key);
         System.out.println(value);
     }
 
@@ -108,4 +108,18 @@ public class MemcachedApplicationTests {
         System.out.println("second=======================" + xMemcachedClient.get("second"));
     }
 
+    @Test
+    public void updateSerino() throws InterruptedException, MemcachedException, TimeoutException {
+        //天平账号f_tpad_user
+//        xMemcachedClient.set("uic_counter_serialno:tpad", 0,"45273147");
+        System.out.println("tpad count="+xMemcachedClient.get("uic_counter_serialno:tpad"));
+
+        //老板锁屏 appid=9
+//        xMemcachedClient.set("uic_counter_serialno:bosslocker",0, "24405266");
+        System.out.println("bosslocker count="+xMemcachedClient.get("uic_counter_serialno:bosslocker"));
+
+        //天天锁屏  //天平账号 appid=1
+        xMemcachedClient.set("uic_counter_serialno:fun", 0, "24405266");
+        System.out.println("fun count="+xMemcachedClient.get("uic_counter_serialno:fun"));
+    }
 }
