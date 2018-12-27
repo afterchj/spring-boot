@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.example.demo.exception.InvalidCodeException;
 import com.example.demo.service.dubbo.MsgServiceConsume;
 import org.junit.Test;
@@ -18,14 +20,13 @@ public class DubboClientApplicationTests {
 //    @Autowired
 //    DemoServiceConsume demoServiceConsume;
 
-    @Autowired
-    MsgServiceConsume sendService;
+//    @Autowired
+//    MsgServiceConsume sendService;
 
-//    @Test
-//    public void contextLoads() {
-//        System.out.println("test version=" + JSON.toJSONString(consumeService.test1()));
-//        System.out.println("test version=" + JSON.toJSONString(consumeService.test2()));
-//    }
+    @Test
+    public void contextLoads() {
+        System.out.println("test version=" +JSON.parseArray("[556677]"));
+    }
 //
 //    @Test
 //    public void testDubbo() {
@@ -34,19 +35,19 @@ public class DubboClientApplicationTests {
 //        System.out.println("test version=" + demoServiceConsume.test2());
 //    }
 
-    @Test
-    public void testMsg() throws Exception {
-        try {
-//            String code = sendService.updateCheckOut("12", "18170756879");
-//            System.out.println("code=" + code);
-//            String code = sendService.updateCheckOut("9", "18550791817");
-//            System.out.println("code=" + code);
-            String value = sendService.checkValidation("123456", "18550791817");
-            System.out.println("value=" + value);
-
-        } catch (InvalidCodeException e) {
-            e.printStackTrace();
-        }
-    }
-
+//        @Test
+//        public void testMsg () throws Exception {
+//            try {
+//                String code = sendService.updateCheckOut("12", "18170756879");
+//                System.out.println("code=" + code);
+//                String code = sendService.updateCheckOut("9", "18550791817");
+//                System.out.println("code=" + code);
+//                String value = sendService.checkValidation("123456", "18550791817");
+//                System.out.println("value=" + value);
+//
+//            } catch (InvalidCodeException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 }

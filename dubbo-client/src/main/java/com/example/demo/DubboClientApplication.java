@@ -16,7 +16,7 @@ public class DubboClientApplication {
         try {
 //            String code = sendService.updateCheckOut("9", "18550791817");
 //            System.out.println("code=" + code);
-            value = sendService.checkValidation("123456", "18550791817");
+            value = sendService.checkValidation("505597", "18550791817");
         } catch (Exception e) {
             e.printStackTrace();
         }
