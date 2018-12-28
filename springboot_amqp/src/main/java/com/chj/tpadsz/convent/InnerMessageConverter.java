@@ -15,18 +15,19 @@ import java.io.Serializable;
 @Component
 public class InnerMessageConverter implements MessageConverter {
 
-	@Override
-	public Object fromMessage(Message message) throws JMSException,
+    @Override
+    public String fromMessage(Message message) throws JMSException,
             MessageConversionException {
 //		ObjectMessage objMessage = (ObjectMessage) message;
-		return JSON.toJSONString(message);
+        System.out.println("before receive format message...");
+        return JSON.toJSONString(message);
 
-	}
+    }
 
-	@Override
-	public Message toMessage(Object object, Session session)
-			throws JMSException, MessageConversionException {
-		return session.createObjectMessage((Serializable) object);
-	}
+    @Override
+    public Message toMessage(Object object, Session session) throws JMSException, MessageConversionException {
+        System.out.println("before send format message..."+object.toString());
+        return session.createObjectMessage((Serializable) object);
+    }
 
 }

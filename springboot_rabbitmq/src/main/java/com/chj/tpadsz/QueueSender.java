@@ -1,13 +1,11 @@
-package com.chj.tpadsz.service;
+package com.chj.tpadsz;
 
+import com.chj.tpadsz.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by hongjian.chen on 2018/12/27.
@@ -16,18 +14,19 @@ import java.util.Date;
 @Service
 public class QueueSender {
 
+    private Logger logger = LoggerFactory.getLogger(QueueSender.class);
+
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send1() {
-        for (int i = 0; i < 100; i++) {
-            rabbitTemplate.convertAndSend("hello-queue", "hello " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date()));
-        }
+    public void send1(int i) {
+        logger.info("sender1 send hello " + (i + 1));
+        rabbitTemplate.convertAndSend("hello-queue", "sender1 hello " + (i + 1));
     }
 
-    public void send2() {
-        String context = "hello " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss SSS").format(new Date());
-        rabbitTemplate.convertAndSend("hello-queue", context);
+    public void send2(int i) {
+        logger.info("sender2 send hello " + (i + 1));
+        rabbitTemplate.convertAndSend("hello-queue", "sender2 hello " + (i + 1));
     }
 
     public void sendMsg() {

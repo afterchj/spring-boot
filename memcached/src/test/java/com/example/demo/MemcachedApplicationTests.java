@@ -47,12 +47,15 @@ public class MemcachedApplicationTests {
         // 取出缓存
         Object a = memCachedClient.get("testKey");
         System.out.println("a=" + a);
+//        memCachedClient.set("number","100");
+        memCachedClient.incr("number",1);
+        System.out.println("number="+memCachedClient.get("number"));
 
 
         // 3s后过期
         memCachedClient.set("b", "2", new Date(3000));
         Object b = memCachedClient.get("b");
-        System.out.println(b);
+        System.out.println("b="+b);
 
         Thread.sleep(3000);
         b = memCachedClient.get("b");

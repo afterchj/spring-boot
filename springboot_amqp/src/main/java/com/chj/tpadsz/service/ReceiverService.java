@@ -1,5 +1,7 @@
 package com.chj.tpadsz.service;
 
+import com.chj.tpadsz.component.Person;
+import com.chj.tpadsz.component.User;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +19,9 @@ public class ReceiverService {
         System.out.println("接收到queue://com.tpadsz.uic.queue.email消息：" + message);
     }
 
-    @JmsListener(destination = "test-destination")
-    public void receiverMessage2(String message) {
-        System.out.println("接收到test-destination消息：" + message);
+    @JmsListener(destination = "after-destination")
+    public void receiverMessage2(User message) {
+        System.out.println("接收到after-destination消息：" + message);
     }
 
     @JmsListener(destination = "com.tpadsz.uic.queue.email")
@@ -27,9 +29,5 @@ public class ReceiverService {
         System.out.println("接收到com.tpadsz.uic.queue.email消息：" + message);
     }
 
-    @JmsListener(destination = "queue-demo")
-    public void receiverMessage4(String message) {
-        System.out.println("接收到queue-demo消息：" + message);
-    }
 
 }
