@@ -17,16 +17,16 @@ public class TopicSender {
 
     public void send() {
         String context = "hi, i am message all";
-        this.rabbitTemplate.convertAndSend("topicExchange", "topic.1", context);
-    }
-
-    public void send1() {
-        String context = "hi, i am message 1";
         this.rabbitTemplate.convertAndSend("topicExchange", "topic.message", context);
     }
 
-    public void send2() {
-        String context = "hi, i am messages 2";
-        this.rabbitTemplate.convertAndSend("topicExchange", "topic.messages", context);
+    public void send1(int i) {
+        String context = "hi, i am message ";
+        this.rabbitTemplate.convertAndSend("topicExchange", "topic.message", context + i);
+    }
+
+    public void send2(int i) {
+        String context = "hi, i am messages ";
+        this.rabbitTemplate.convertAndSend("topicExchange", "topic.messages", context + i);
     }
 }

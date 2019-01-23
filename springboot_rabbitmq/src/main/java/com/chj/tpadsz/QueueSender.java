@@ -19,21 +19,12 @@ public class QueueSender {
     @Autowired
     private AmqpTemplate rabbitTemplate;
 
-    public void send1(int i) {
-        logger.info("sender1 send hello " + (i + 1));
-        rabbitTemplate.convertAndSend("hello-queue", "sender1 hello " + (i + 1));
+    public void send(int i) {
+        rabbitTemplate.convertAndSend("hello-queue", "sender2 hello " + i);
     }
 
-    public void send2(int i) {
-        logger.info("sender2 send hello " + (i + 1));
-        rabbitTemplate.convertAndSend("hello-queue", "sender2 hello " + (i + 1));
-    }
-
-    public void sendMsg() {
-        for (int i = 0; i < 3; i++) {
-            rabbitTemplate.convertAndSend("my-queue", "来自RabbitMQ的问候" + (i + 1));
-            sleepOneSecond();
-        }
+    public void sendObj(User user) throws InterruptedException {
+        rabbitTemplate.convertAndSend("hello-object", user);
     }
 
     public void sleepOneSecond() {

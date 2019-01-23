@@ -16,30 +16,34 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class MyApplicationTest {
+public class RabbitApplicationTest {
 
     @Autowired
     private QueueSender queueSender;
 
-    @Autowired
-    private ObjSender objSender;
 
     @Autowired
     private TopicSender topicSender;
 
     @Test
     public void test1() throws InterruptedException {
+        System.out.println("queueSender="+queueSender);
+
 //        queueSender.sendMsg();
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
         System.out.println("-------------------------------分割线-------------------------------");
-//        for (int i = 0; i < 10; i++) {
-        topicSender.send();
-        topicSender.send1();
-        topicSender.send2();
-//            objSender.sendObj(new User(i, "test" + i));
-//            queueSender.send1(i);
-//            queueSender.send2(i);
-//        }
+        for (int i = 1; i < 101; i++) {
+//            if (i % 2 == 0) {
+//                topicSender.send();
+//
+//            }else if (i%3==0){
+//                topicSender.send1(i);
+//            }else {
+//                topicSender.send2(i);
+//            }
+            queueSender.sendObj(new User(i, "test" + i));
+            queueSender.send(i);
+        }
         Thread.sleep(10000);
     }
 

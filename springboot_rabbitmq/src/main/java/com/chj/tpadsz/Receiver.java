@@ -11,20 +11,16 @@ public class Receiver {
 
     private Logger logger = LoggerFactory.getLogger(Receiver.class);
 
-//    @RabbitListener(queues = "my-queue")
-//    public void receiveMessage(String message) {
-//        try {
-//            System.out.println("Received my-queue-><" + message + ">");
-//            new Thread().sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-    @RabbitListener(queues = "hello-queue")
-    public void receiveMsg(String message) throws InterruptedException {
-        logger.info("Receiver2:" + message);
-        System.out.println("Receiver2 hello-queue->" + message);
+    @RabbitListener(queues = "tpad-blt-console-queue")
+    public void remoteMsg(String message) throws InterruptedException {
+        logger.info("Receive tpad-blt-console-queue:" + message);
+        System.out.println("receive message:" + message);
+    }
+
+    @RabbitListener(queues = "hello-object")
+    public void process(User user) throws InterruptedException {
+        logger.info("Receiver object:" + user);
+        System.out.println("Receiver hello-object: " + user);
         new Thread().sleep(1000);
     }
 }
