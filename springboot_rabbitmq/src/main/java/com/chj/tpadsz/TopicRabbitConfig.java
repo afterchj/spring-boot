@@ -44,7 +44,7 @@ public class TopicRabbitConfig {
 
     @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with("spring.topic.*.message");
+        return BindingBuilder.bind(queueMessage).to(exchange).with("spring.topic.*");
     }
 
     @Bean
