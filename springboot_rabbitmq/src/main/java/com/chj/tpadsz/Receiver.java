@@ -14,12 +14,11 @@ public class Receiver {
 
     @RabbitListener(queues = "tpad-blt-console-queue")
     public void remoteMsg(Message message) throws InterruptedException {
-        logger.info("receive message:{} " + message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
+        System.out.println("receive message: " + message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
     }
 
     @RabbitListener(queues = "hello-object")
     public void process(User user) throws InterruptedException {
         logger.info("Receiver object:" + user);
-        new Thread().sleep(1000);
     }
 }

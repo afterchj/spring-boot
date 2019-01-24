@@ -1,9 +1,6 @@
 package com.chj.tpadsz;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TopicRabbitConfig {
 
-    final static String message = "spring.topic.message";
-    final static String messages = "spring.topic.messages";
+    final static String message = "topic.demo";
+    final static String messages = "topic.spring.test";
 
     @Bean
     public Queue queueMessage() {
@@ -29,27 +26,27 @@ public class TopicRabbitConfig {
 
     @Bean
     public Queue demoQueue() {
-        return new Queue("spring.topic.demo.message");
+        return new Queue("topic.spring.demo.message");
     }
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange("topicExchange");
+        return new TopicExchange("topic_exchange");
     }
 
     @Bean
     Binding bindingExchangeDemo() {
-        return BindingBuilder.bind(demoQueue()).to(exchange()).with("*.topic.*.message");
+        return BindingBuilder.bind(demoQueue()).to(exchange()).with("topic.spring.*.message");
     }
 
     @Bean
-    Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with("spring.topic.*");
+    Binding bindingExchangeMessage() {
+        return BindingBuilder.bind(queueMessage()).to(exchange()).with("topic.spring.*");
     }
 
     @Bean
-    Binding bindingExchangeMessages(Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with("spring.topic.#");
+    Binding bindingExchangeMessages() {
+        return BindingBuilder.bind(queueMessages()).to(exchange()).with("topic.#");
     }
 
 }

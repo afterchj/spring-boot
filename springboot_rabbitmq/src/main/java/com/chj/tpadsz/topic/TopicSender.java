@@ -17,16 +17,16 @@ public class TopicSender {
 
     public void send(int i) {
         String context = "hi, i am message all ";
-        this.rabbitTemplate.convertAndSend("topicExchange", "spring.topic.message", context + i);
+        this.rabbitTemplate.convertAndSend("topic_exchange", "topic.demo", context + i);
     }
 
     public void send1(int i) {
         String context = "hi, i am message * ";
-        this.rabbitTemplate.convertAndSend("topicExchange", "spring.topic.demo.message", context + i);
+        this.rabbitTemplate.convertAndSend("topic_exchange", "topic.spring.demo.message", context + i);
     }
 
     public void send2(int i) {
         String context = "hi, i am messages # ";
-        this.rabbitTemplate.convertAndSend("topicExchange", "spring.topic.messages", context + i);
+        this.rabbitTemplate.convertAndSend("topic_exchange", "topic.spring.test", context + i);
     }
 }
