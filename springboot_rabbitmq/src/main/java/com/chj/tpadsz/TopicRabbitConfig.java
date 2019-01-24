@@ -14,17 +14,22 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TopicRabbitConfig {
 
-    final static String message = "topic.message";
-    final static String messages = "topic.messages";
+    final static String message = "spring.topic.message";
+    final static String messages = "spring.topic.messages";
 
     @Bean
     public Queue queueMessage() {
-        return new Queue(TopicRabbitConfig.message);
+        return new Queue(message);
     }
 
     @Bean
     public Queue queueMessages() {
-        return new Queue(TopicRabbitConfig.messages);
+        return new Queue(messages);
+    }
+
+    @Bean
+    public Queue demoQueue() {
+        return new Queue("spring.topic.demo.message");
     }
 
     @Bean
@@ -33,13 +38,18 @@ public class TopicRabbitConfig {
     }
 
     @Bean
+    Binding bindingExchangeDemo() {
+        return BindingBuilder.bind(demoQueue()).to(exchange()).with("*.topic.*.message");
+    }
+
+    @Bean
     Binding bindingExchangeMessage(Queue queueMessage, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessage).to(exchange).with("topic.message");
+        return BindingBuilder.bind(queueMessage).to(exchange).with("spring.topic.*.message");
     }
 
     @Bean
     Binding bindingExchangeMessages(Queue queueMessages, TopicExchange exchange) {
-        return BindingBuilder.bind(queueMessages).to(exchange).with("topic.#");
+        return BindingBuilder.bind(queueMessages).to(exchange).with("spring.topic.#");
     }
 
 }

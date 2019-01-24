@@ -1,5 +1,6 @@
 package com.chj.tpadsz.topic;
 
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -10,13 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicReceiver {
 
-    @RabbitListener(queues = "topic.message")
-    public void process1(String message) {
-        System.out.println("Topic Receiver1  : " + message);
+    @RabbitListener(queues = "spring.topic.message")
+    public void process1(Message message) {
+        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
     }
 
-    @RabbitListener(queues = "topic.messages")
-    public void process2(String message) {
-        System.out.println("Topic Receiver2  : " + message);
+    @RabbitListener(queues = "spring.topic.messages")
+    public void process2(Message message) {
+        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
+    }
+
+    @RabbitListener(queues = "spring.topic.demo.message")
+    public void process3(Message message) {
+        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
     }
 }

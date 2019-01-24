@@ -12,13 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(queues = "hello-queue")
 public class QueueRecive {
-    private Logger logger = LoggerFactory.getLogger(QueueSender.class);
+    private Logger logger = LoggerFactory.getLogger(QueueRecive.class);
 
     @RabbitHandler
     public void process(String msg) throws InterruptedException {
         logger.info("hello-queue:"+msg);
-        System.out.println("Receiver hello-queue: " + msg);
-        new Thread().sleep(3000);
     }
-
 }

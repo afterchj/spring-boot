@@ -20,7 +20,7 @@ public class QueueSender {
     private AmqpTemplate rabbitTemplate;
 
     public void send(int i) {
-        rabbitTemplate.convertAndSend("hello-queue", "sender2 hello " + i);
+        rabbitTemplate.convertAndSend("hello-queue", "say hello " + i);
     }
 
     public void sendObj(User user) throws InterruptedException {
