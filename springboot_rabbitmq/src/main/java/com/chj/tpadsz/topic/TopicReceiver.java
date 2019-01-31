@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicReceiver {
 
-    @RabbitListener(queues = "topic.demo")
+    @RabbitListener(queues = "topic.messages")
     public void process1(Message message) {
         System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
     }
 
-    @RabbitListener(queues = "topic.spring.test")
+    @RabbitListener(queues = "topic.test.message")
     public void process2(Message message) {
         System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
     }
