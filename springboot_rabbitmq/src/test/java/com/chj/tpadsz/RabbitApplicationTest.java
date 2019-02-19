@@ -43,7 +43,7 @@ public class RabbitApplicationTest {
 //            queueSender.sendObj(new User(i, "test" + i));
 //            queueSender.send(i);
         }
-        Thread.sleep(10000);
+//        Thread.sleep(10000);
     }
 
     @Test

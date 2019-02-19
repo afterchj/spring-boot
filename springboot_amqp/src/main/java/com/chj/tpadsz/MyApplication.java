@@ -26,7 +26,7 @@ public class MyApplication implements CommandLineRunner {
     @Autowired
     private JmsTemplate template;
 
-    @Resource(name = "queue1")
+    @Resource(name = "queue2")
     private Destination queue;
 
     @Autowired
@@ -40,10 +40,9 @@ public class MyApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 //        producer.send();
-//        producer.send(1, new User(101, "after"));
 //        ActiveMQObjectMessage objectMessage=new ActiveMQObjectMessage();
 //        objectMessage.setObject( new User(101, "after"));
-//        template.send("queue-1",new Msg());
-//        template.send("after-destination",new Msg());
+//        template.convertAndSend(queue,"test is ok");
+        template.send("after-destination",new Msg());
     }
 }

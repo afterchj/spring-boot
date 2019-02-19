@@ -1,4 +1,4 @@
-package com.chj.tpadsz;
+package com.tpadsz.after.active;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
-
 
 import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
@@ -28,11 +27,6 @@ public class ActiveConfig {
     @Bean
     public Queue queue1() {
         return new ActiveMQQueue("queue-1");
-    }
-
-    @Bean
-    public Queue queue2() {
-        return new ActiveMQQueue("tpad-blt-console-queue");
     }
 
     @Bean

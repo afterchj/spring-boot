@@ -20,13 +20,13 @@ public class Customer {
 
     //queue模式
     @JmsListener(destination = "queue-1", containerFactory = "jmsListenerContainerQueue")
-    public void receiveQueue(User text) throws JMSException {
+    public void receiveQueue(String text) throws JMSException {
         System.out.println(text + " queue-1 消息已经消费了");
     }
 
     //topic模式
     @JmsListener(destination = "topic-1", containerFactory = "jmsListenerContainerTopic")
-    public void receiveTopic(User text) throws JMSException {
+    public void receiveTopic(String text) throws JMSException {
         System.out.println(text + " topic-1 消息已经消费了");
     }
 
