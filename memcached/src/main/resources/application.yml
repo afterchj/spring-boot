@@ -2,7 +2,7 @@
 memcache:
   host: 10.10.11.85
   port: 12000
-  servers: 10.10.11.85:12000
+  servers: 119.3.49.192:12000
   failover: true
   initConn: 100
   minConn: 20

@@ -50,7 +50,8 @@ public class HttpUtils {
     private static Logger logger = LoggerUtils.SYSTEM;
 
     public static void main(String[] args) throws Exception {
-        sendSms("9", "18550791817", "556677");
+//        sendSms("9", "18550791817", "556677");
+        callSendMsg("12", "556677", "18550791817");
     }
 
     public static JSONObject sendSms(String appid, String receiver, String code) {
