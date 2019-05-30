@@ -26,8 +26,8 @@ public class ClientMain {
 	public static void main(String[] args) throws IOException {
 //		new ClientMain("122.112.229.195", 8001).run();
 //		new ClientMain("119.3.49.192", 8001).run();
-//		new ClientMain("127.0.0.1", 8001).run();
-		new ClientMain("192.168.16.27", 8001).run();
+		new ClientMain("127.0.0.1", 8001).run();
+//		new ClientMain("192.168.16.27", 8001).run();
 	}
 
 	public void run() throws IOException {
@@ -58,5 +58,22 @@ public class ClientMain {
 			System.exit(1);
 		}
 	}
-
+	public void sendCron(String str) {
+		//设置一个worker线程，使用
+		EventLoopGroup worker = new NioEventLoopGroup();
+		Bootstrap bootstrap = new Bootstrap();
+		bootstrap.group(worker);
+		//指定所使用的 NIO 传输 Channel
+		bootstrap.channel(NioSocketChannel.class);
+		bootstrap.handler(new ClientInitialHandler());
+		try {
+			//使用指定的 端口设置套 接字地址
+			Channel channel = bootstrap.connect(host, port).sync().channel();
+			//向服务端发送内容
+			channel.writeAndFlush(str);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 }
