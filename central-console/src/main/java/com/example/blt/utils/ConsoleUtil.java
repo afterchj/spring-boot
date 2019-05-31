@@ -21,7 +21,7 @@ public class ConsoleUtil {
     private static Logger logger = LoggerFactory.getLogger(ConsoleUtil.class);
 
     public static void saveHosts(List<HostInfo> list) {
-        list = list.stream().filter(o -> !o.getIp().equals("127.0.0.1")).collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(HostInfo::getIp))), ArrayList::new));
+        list = list.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(HostInfo::getIp))), ArrayList::new));
         //Write Obj to File
         File file = new File("/temp/hosts/", "hosts");
         if (!file.getParentFile().exists()) {
@@ -55,9 +55,5 @@ public class ConsoleUtil {
             IOUtils.closeQuietly(ois);
         }
         return list;
-    }
-
-    public static void main(String[] args) {
-        logger.info("size=" + getHosts().size());
     }
 }

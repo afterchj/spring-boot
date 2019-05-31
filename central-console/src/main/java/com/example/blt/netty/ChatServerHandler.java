@@ -72,8 +72,8 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                             ch.writeAndFlush(cmd);
                         }
                     } else {
-                        ch.writeAndFlush(arg1);
                         logger.info("[" + ip +"/"+channel.id()+ "] receive cmd:" + arg1);
+                        ch.writeAndFlush(arg1);
                     }
                 }
             }
