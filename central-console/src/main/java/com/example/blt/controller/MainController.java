@@ -3,6 +3,7 @@ package com.example.blt.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.blt.entity.ConsoleInfo;
 import com.example.blt.netty.ClientMain;
+import com.example.blt.task.ControlTask;
 import com.example.blt.utils.SocketUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,9 @@ public class MainController {
     @RequestMapping("/switch")
     public String console(ConsoleInfo consoleInfo) {
         String info = JSON.toJSONString(consoleInfo);
-        clientMain.sendCron(info, true);
-        return "ok";
+        ControlTask task = new ControlTask(clientMain, info, true);
+        String result = task.executeTask();
+        return result;
     }
 
     @RequestMapping(value = "/sendSocket", method = RequestMethod.POST)

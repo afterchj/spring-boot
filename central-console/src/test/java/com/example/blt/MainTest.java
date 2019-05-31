@@ -16,11 +16,10 @@ import java.util.stream.Collectors;
  */
 public class MainTest {
 
-    @Test
-    public void testStream() throws Exception {
+    public static void main(String[] args) {
         String str = "[{\"id\":\"684fd6ef\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"9280ead5\",\"ip\":\"192.168.1.51.75\",\"status\":true},{\"id\":\"9280ead5\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"192.168.51.90\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"192.168.51.95\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true}]";
 //        List<HostInfo> infoList = JSON.parseArray(str, HostInfo.class);
-        List<HostInfo> infoList= ConsoleUtil.getHosts();
+        List<HostInfo> infoList = ConsoleUtil.getHosts();
         System.out.println("去重之前：" + infoList.size());
 //        infoList = infoList.stream().filter(o -> !o.getIp().equals("127.0.0.1")).collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(HostInfo::getIp))), ArrayList::new));
         infoList = infoList.stream().filter(o -> !o.getIp().equals("127.0.0.1")).collect(Collectors.toList());

@@ -29,14 +29,10 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     //保存所有活动的用户
     public static final ChannelGroup group = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
-    public static final CopyOnWriteArrayList hosts = new CopyOnWriteArrayList();
-//    @Resource
-//    private RedisTemplate<String,String> redisTemplate;
-
     @Override
     protected void channelRead0(ChannelHandlerContext arg0, String arg1) throws Exception {
+        CopyOnWriteArrayList hosts = new CopyOnWriteArrayList();
 //        MemCachedClient memCachedClient = new MemCachedClient();
-//        redisTemplate= new RedisTemplate<>();
         Channel channel = arg0.channel();
         //当有用户发送消息的时候，对其他用户发送信息
         for (Channel ch : group) {
@@ -54,7 +50,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                     JSONObject jsonObject = JSON.parseObject(arg1);
                     String cmd = jsonObject.getString("cmd");
                     String to = jsonObject.getString("to");
-                    logger.info("[" + ip +"/"+channel.id()+ "] cmd: " + arg1);
+                    logger.info("[" + ip + "/" + channel.id() + "] cmd: " + arg1);
                     if (to.equals(ip)) {
                         ch.writeAndFlush(cmd);
                     } else {
@@ -63,7 +59,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                 } catch (Exception e) {
                     int index = arg1.indexOf(":");
                     if (index != -1) {
-                        logger.info("[" + ip +"/"+channel.id()+ "] receive cmd:" + arg1);
+                        logger.info("[" + ip + "/" + channel.id() + "] receive cmd:" + arg1);
                         String to = arg1.substring(0, index);
                         String cmd = arg1.substring(index + 1);
                         if (ip.equals(to)) {
@@ -72,7 +68,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                             ch.writeAndFlush(cmd);
                         }
                     } else {
-                        logger.info("[" + ip +"/"+channel.id()+ "] receive cmd:" + arg1);
+                        logger.info("[" + ip + "/" + channel.id() + "] receive cmd:" + arg1);
                         ch.writeAndFlush(arg1);
                     }
                 }
@@ -84,7 +80,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
         group.add(channel);
-        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " add the room");
+        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " add the room size " + group.size());
     }
 
     @Override
@@ -104,13 +100,15 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + "offline");
+        group.remove(channel);
+        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " offline");
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        Channel channel = ctx.channel();
         ctx.close().sync();
-        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " exit the room");
+        Channel channel = ctx.channel();
+        group.remove(channel);
+        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " exit the room size " + group.size());
     }
 }
