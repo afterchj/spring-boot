@@ -10,23 +10,33 @@
 <script type="text/javascript">
     $(function () {
         $("#show").html("jquery文件加载成功！");
-        $("#btn").click(function () {
-            var cmd=$("#btn").val();
-            console.log("value",cmd);
-            if (cmd=='1'){
-                $("#btn").val("2")
-            }else {
-                $("#btn").val("1")
-            }
-            $.get("/switch",{"cmd":$("#btn").val()},function (result) {
-                console.log("result",result);
-            })
+    });
+    function sendCmd(id) {
+        console.log("id", id);
+        var cmd = $("#" + id).val();
+        console.log("value", cmd);
+        if (cmd == '1') {
+            $("#" + id).val("2");
+            $("#" + id).text("关")
+        } else {
+            $("#" + id).val("1");
+            $("#" + id).text("开")
+        }
+        $.get("/switch", {"cmd": $("#"+id).val(), "to": "all"}, function (result) {
+            console.log("result", result);
         })
-    })
+    }
 </script>
 <body>
 <h1>Welcome come to Spring Boot world!</h1>
 <p id="show"></p>
-<button id="btn" value="1">测试</button>
+<p>
+    <label for="btn1">模拟控制1：</label>
+    <button id="btn1" value="1" onclick="sendCmd(this.id)">开</button>
+</p>
+<p>
+    <label for="btn2">模拟控制2：</label>
+    <button id="btn2" value="1" onclick="sendCmd(this.id)">开</button>
+</p>
 </body>
 </html>

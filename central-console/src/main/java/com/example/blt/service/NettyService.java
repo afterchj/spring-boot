@@ -15,10 +15,13 @@ import org.springframework.stereotype.Service;
 @EnableScheduling
 public class NettyService implements ApplicationListener<ContextRefreshedEvent> {
 
+    private ClientMain clientMain = new ClientMain();
+
     @Scheduled(cron = "0/30 * * * * ?")
     public void cronTest() {
-        new ClientMain("127.0.0.1", 8001).sendCron("ok");
+        clientMain.sendCron("ok", false);
     }
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         new ServerMain().run(8001);

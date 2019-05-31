@@ -15,4 +15,13 @@ public class HomeController {
         return "index";
     }
 
+    @RequestMapping("/welcome")
+    public String welcome(){
+        return "welcome";
+    }
+
+    @RequestMapping("/index2")
+    public String index2(){
+        return "index2";
+    }
 }

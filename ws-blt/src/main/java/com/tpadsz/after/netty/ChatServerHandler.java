@@ -34,8 +34,9 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 //            }else {
 //                channel.writeAndFlush("[weChat]:" + arg1);
 //            }
+            logger.info("[" + ch.remoteAddress() + "]: " + arg1);
         }
-        logger.info("[" + channel.remoteAddress() + "]: " + arg1);
+//        logger.info("[" + channel.remoteAddress() + "]: " + arg1);
     }
 
     @Override

@@ -42,7 +42,16 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.25.Final</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.21</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -57,7 +66,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>central-console</finalName>
+		<finalName>blt-console</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
