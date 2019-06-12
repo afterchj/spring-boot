@@ -19,7 +19,7 @@ public class ClientMain {
 
     private static Logger logger = LoggerFactory.getLogger(ClientMain.class);
     private static String host = "127.0.0.1";
-//    private static String host = "192.168.51.95";
+    //    private static String host = "192.168.51.95";
     private static int port = 8001;
     Channel channel = null;
 
@@ -32,42 +32,28 @@ public class ClientMain {
 
     public void run() throws IOException {
         Channel channel = getChannel();
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            logger.warn("请输入指令：");
-            while (true) {
-                String input = reader.readLine();
-                if (input != null) {
-                    if ("quit".equals(input)) {
-                        System.exit(1);
-                    }
-                    channel.writeAndFlush(input);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        logger.warn("请输入指令：");
+        while (true) {
+            String input = reader.readLine();
+            if (input != null) {
+                if ("quit".equals(input)) {
+                    System.exit(0);
                 }
-            }
-        } catch (IOException e) {
-            logger.error("InterruptedException=" + e.getMessage());
-            try {
-                channel.closeFuture().sync();
-            } catch (InterruptedException e1) {
-                e1.printStackTrace();
+                channel.writeAndFlush(input);
             }
         }
     }
 
     public void sendCron(String str, boolean flag) {
         Channel channel = getChannel();
-        try {
-            //向服务端发送内容
-            channel.writeAndFlush(str);
-        } catch (Exception e) {
-            logger.error("InterruptedException=" + e.getMessage());
-        } finally {
-            if (flag) {
-                try {
-                    channel.closeFuture().sync();
-                } catch (InterruptedException e1) {
-                    logger.error("InterruptedException=" + e1.getMessage());
-                }
+        //向服务端发送内容
+        channel.writeAndFlush(str);
+        if (flag) {
+            try {
+                channel.closeFuture();
+            } catch (Exception e1) {
+                logger.error("Exception=" + e1);
             }
         }
     }
