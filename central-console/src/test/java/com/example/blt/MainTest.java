@@ -3,12 +3,12 @@ package com.example.blt;
 import com.alibaba.fastjson.JSON;
 import com.example.blt.entity.HostInfo;
 import com.example.blt.utils.ConsoleUtil;
+import com.example.blt.utils.SpringUtil;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -25,5 +25,26 @@ public class MainTest {
         infoList = infoList.stream().filter(o -> !o.getIp().equals("127.0.0.1")).collect(Collectors.toList());
         System.out.println("去重之后：" + infoList.size());
         System.out.println("hosts：" + JSON.toJSONString(infoList));
+    }
+
+    @Test
+    public void testHibernate(){
+        EntityManager em = SpringUtil.getEntityManager().createEntityManager();
+        HostInfo host = new HostInfo();
+        host.setStatus(true);
+        host.setIp("192.168.16.1");
+        host.setCreate_date(new Date());
+        host.setLog_date(new Date());
+        em.persist(host);
+//        try {
+//            Query query = em.createNativeQuery("select * from host_info as p where p.ip = ?1",HostInfo.class);
+//            query.setParameter(1, host.getIp());
+//            HostInfo info = (HostInfo) query.getSingleResult();
+//            System.out.println("id="+info.getId());
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
     }
 }

@@ -3,6 +3,7 @@ package com.example.blt.netty;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.example.blt.entity.HostInfo;
+import com.example.blt.service.ConsoleService;
 import com.example.blt.utils.ConsoleUtil;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
@@ -13,6 +14,7 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.SocketAddress;
@@ -21,7 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * 服务器主要的业务逻辑
  */
-@Component
 @ChannelHandler.Sharable
 public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
@@ -31,7 +32,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     protected void channelRead0(ChannelHandlerContext arg0, String arg1) throws Exception {
-        CopyOnWriteArrayList hosts = new CopyOnWriteArrayList();
+//        CopyOnWriteArrayList hosts = new CopyOnWriteArrayList();
 //        MemCachedClient memCachedClient = new MemCachedClient();
         Channel channel = arg0.channel();
         //当有用户发送消息的时候，对其他用户发送信息
@@ -40,12 +41,6 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
             if (address != null) {
                 String str = address.toString();
                 String ip = str.substring(1, str.indexOf(":"));
-                HostInfo info = new HostInfo();
-                info.setId(channel.id().toString());
-                info.setIp(ip);
-                info.setStatus(channel.isOpen());
-                hosts.add(info);
-                ConsoleUtil.saveHosts(hosts);
                 try {
                     JSONObject jsonObject = JSON.parseObject(arg1);
                     String cmd = jsonObject.getString("cmd");
@@ -78,9 +73,19 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        CopyOnWriteArrayList hosts = new CopyOnWriteArrayList();
         Channel channel = ctx.channel();
         group.add(channel);
-        logger.info("[" + channel.remoteAddress() + "]:" + channel.id() + " add the room size " + group.size());
+        SocketAddress address = channel.remoteAddress();
+        if (address != null) {
+            String str = address.toString();
+            String ip = str.substring(1, str.indexOf(":"));
+            HostInfo info = new HostInfo();
+            info.setIp(ip);
+            info.setStatus(channel.isOpen());
+            hosts.add(info);
+            ConsoleUtil.saveHosts(hosts);
+        }
     }
 
     @Override

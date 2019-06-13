@@ -19,10 +19,10 @@ public class ServerMain {
     private static Logger logger = LoggerFactory.getLogger(ServerMain.class);
 
     public static void main(String[] args) {
-        new ServerMain().run(8001);
+        run(8001);
     }
 
-    public void run(int port) {
+    public static void run(int port) {
         EventLoopGroup acceptor = new NioEventLoopGroup();
         EventLoopGroup worker = new NioEventLoopGroup();
         final ServerBootstrap bootstrap = new ServerBootstrap();
