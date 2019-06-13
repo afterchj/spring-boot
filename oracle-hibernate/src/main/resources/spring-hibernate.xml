@@ -84,7 +84,7 @@
     </tx:advice>
     <!-- 事务入口 -->
     <aop:config>
-        <aop:pointcut id="allServiceMethod" expression="execution(* com.example.demo.*.*(..))" />
+        <aop:pointcut id="allServiceMethod" expression="execution(* com.example.demo.service.*.*(..))" />
         <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice" />
     </aop:config>
 
