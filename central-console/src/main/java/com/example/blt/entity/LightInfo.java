@@ -2,6 +2,7 @@ package com.example.blt.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -22,6 +23,7 @@ public class LightInfo implements Serializable {
     private String lmac;
     private String vaddr;
     private String other;
+    private Date log_date=new Date();
 
     @ManyToOne(targetEntity = HostInfo.class,fetch = FetchType.LAZY)
     @JoinColumn(name = "host_id")
@@ -105,5 +107,13 @@ public class LightInfo implements Serializable {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public Date getLog_date() {
+        return log_date;
+    }
+
+    public void setLog_date(Date log_date) {
+        this.log_date = log_date;
     }
 }
