@@ -33,7 +33,7 @@ public class BltManager {
         }
     }
 
-    public static void tempFormat(String format) {
+    public static void   tempFormat(String format) {
         String str = format.substring(18, format.length());
         int len = str.length();
         logger.info("str=" + str + ",len=" + len);

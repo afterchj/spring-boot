@@ -45,16 +45,15 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                     JSONObject jsonObject = JSON.parseObject(arg1);
                     String cmd = jsonObject.getString("cmd");
                     String to = jsonObject.getString("to");
-                    logger.info("[" + ip + "/" + channel.id() + "] cmd: " + arg1);
                     if (to.equals(ip)) {
                         ch.writeAndFlush(cmd);
                     } else {
                         ch.writeAndFlush(cmd);
                     }
+                    logger.info("[" + ip + "/" + channel.id() + "] cmd: " + arg1);
                 } catch (Exception e) {
                     int index = arg1.indexOf(":");
                     if (index != -1) {
-                        logger.info("[" + ip + "/" + channel.id() + "] receive cmd:" + arg1);
                         String to = arg1.substring(0, index);
                         String cmd = arg1.substring(index + 1);
                         if (ip.equals(to)) {
@@ -62,9 +61,10 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
                         } else {
                             ch.writeAndFlush(cmd);
                         }
-                    } else {
                         logger.info("[" + ip + "/" + channel.id() + "] receive cmd:" + arg1);
+                    } else {
                         ch.writeAndFlush(arg1);
+                        logger.info("[" + ip + "/" + channel.id() + "] receive heartbeat:" + arg1);
                     }
                 }
             }

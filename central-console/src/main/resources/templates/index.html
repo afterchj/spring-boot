@@ -10,6 +10,11 @@
 <script type="text/javascript">
     $(function () {
         $("#show").html("jquery文件加载成功！");
+        $("#test").click(function () {
+            $.get("/test", {"cmd": $("#txt").val()}, function (result) {
+                console.log("result", result);
+            })
+        })
     });
     function sendCmd(id) {
         console.log("id", id);
@@ -18,11 +23,13 @@
         if (status == '开') {
             $("#" + id).val("77010315373766");
             $("#" + id).text("关")
-        } else {
+        } else if (status == '关') {
             $("#" + id).val("77010315323266");
             $("#" + id).text("开")
+        } else {
+            $("#" + id).val("7701011B66");
         }
-        $.get("/switch", {"cmd": $("#"+id).val(), "to": "all"}, function (result) {
+        $.get("/switch", {"cmd": $("#" + id).val(), "to": "all"}, function (result) {
             console.log("result", result);
         })
     }
@@ -33,6 +40,11 @@
 <p>
     <label for="btn1">一键控制：</label>
     <button id="btn1" value="" onclick="sendCmd(this.id)">开</button>
+</p>
+<p>
+    <label for="test">获取灯信息：</label>
+    <input type="text" id="txt" placeholder="输入ping指令"/>
+    <input type="button" id="test" value="测试"/>
 </p>
 </body>
 </html>

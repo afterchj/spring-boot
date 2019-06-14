@@ -24,6 +24,12 @@ public class MainController {
     private Logger logger = LoggerFactory.getLogger(MainController.class);
     private ClientMain clientMain = new ClientMain();
 
+    @RequestMapping("/test")
+    public String console(String cmd) {
+        SocketUtil.sendCmd(cmd);
+        return "ok";
+    }
+
     @RequestMapping("/switch")
     public String console(ConsoleInfo consoleInfo) {
         String info = JSON.toJSONString(consoleInfo);
