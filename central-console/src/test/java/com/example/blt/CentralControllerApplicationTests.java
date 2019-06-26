@@ -1,5 +1,6 @@
 package com.example.blt;
 
+import com.example.blt.dao.BltDao;
 import com.example.blt.dao.ConsoleDao;
 import com.example.blt.dao.LightDao;
 import com.example.blt.entity.HostInfo;
@@ -8,14 +9,18 @@ import com.example.blt.utils.SpringUtil;
 import com.example.blt.utils.StrUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,7 +31,8 @@ public class CentralControllerApplicationTests {
 
     @Autowired
     private LightDao lightDao;
-
+    @Resource
+    private SqlSessionTemplate sqlSessionTemplate;
     @Test
     public void contextLoads() {
         HostInfo host = new HostInfo();
@@ -62,5 +68,11 @@ public class CentralControllerApplicationTests {
     public void testLight(){
         LightInfo info=lightDao.getByVaddr("7d000000");
         logger.info("lmac="+info.getLmac());
+    }
+
+    @Test
+    public void testSqlSessionTemplate() {
+        List<Map> list = sqlSessionTemplate.getMapper(BltDao.class).getLmac();
+        logger.info("list=" + list);
     }
 }

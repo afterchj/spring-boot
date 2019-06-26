@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,10 +39,10 @@ public class ConsoleUtil {
         File file = new File("/temp/hosts/", "hosts");
         //Read Obj from File
         ObjectInputStream ois = null;
-        List<HostInfo> list = null;
+        List<Map> list=new ArrayList();
         try {
             ois = new ObjectInputStream(new FileInputStream(file));
-            list = (List<HostInfo>) ois.readObject();
+            list = (List<Map>) ois.readObject();
             logger.info("lists=" + JSON.toJSONString(list));
         } catch (IOException e) {
             logger.error("IOException:" + e.getMessage());
@@ -55,5 +52,29 @@ public class ConsoleUtil {
             IOUtils.closeQuietly(ois);
         }
         return list;
+    }
+
+    public static void main(String[] args) {
+        getHosts();
+//        List<Map> list=new ArrayList();
+//        for (int i = 0; i < 3; i++) {
+//            Map map=new HashMap();
+//            map.put("vaddr",i+1);
+//            map.put("lmac",i+11);
+//            list.add(map);
+//        }
+//        File file = new File("/temp/hosts/", "hosts");
+//        if (!file.getParentFile().exists()) {
+//            file.getParentFile().mkdirs();
+//        }
+//        ObjectOutputStream oos = null;
+//        try {
+//            oos = new ObjectOutputStream(new FileOutputStream(file));
+//            oos.writeObject(list);
+//        } catch (IOException e) {
+//            logger.error("IOException:" + e.getMessage());
+//        } finally {
+//            IOUtils.closeQuietly(oos);
+//        }
     }
 }

@@ -16,6 +16,6 @@ public class CentralConsoleApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(CentralConsoleApplication.class, args);
-        ServerMain.run(8001);
+//        ServerMain.run(8001);
     }
 }

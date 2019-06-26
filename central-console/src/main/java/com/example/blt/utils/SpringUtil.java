@@ -13,7 +13,7 @@ import javax.persistence.Query;
  */
 public class SpringUtil {
 
-    private static ApplicationContext ctx = null;
+    private static ApplicationContext ctx;
 
     static {
         ctx = new ClassPathXmlApplicationContext("classpath:spring-hibernate.xml");

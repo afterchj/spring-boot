@@ -14,7 +14,7 @@ public class ChatClientHandler extends SimpleChannelInboundHandler<String> {
     protected void channelRead0(ChannelHandlerContext arg0, String arg1) throws Exception {
         Channel channel = arg0.channel();
         //客户端主要用来接收服务器发送的消息
-        logger.info("[from server/" + channel.id() + "]:" + arg1);
+        logger.info("[from server/" + channel.remoteAddress()+ "]:" + arg1);
     }
 
 }

@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -19,7 +20,8 @@ import java.util.stream.Collectors;
  */
 public class MainTest {
 
-    private static Logger logger= LoggerFactory.getLogger(MainTest.class);
+    private static Logger logger = LoggerFactory.getLogger(MainTest.class);
+
 
     public static void main(String[] args) {
         String str = "[{\"id\":\"684fd6ef\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"9280ead5\",\"ip\":\"192.168.1.51.75\",\"status\":true},{\"id\":\"9280ead5\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"192.168.51.90\",\"status\":true},{\"id\":\"f670f820\",\"ip\":\"192.168.51.95\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c48e50ec\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"dcc4a1d8\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true},{\"id\":\"c0da419d\",\"ip\":\"127.0.0.1\",\"status\":true}]";
