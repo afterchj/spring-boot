@@ -21,7 +21,7 @@ public class NettyService implements ApplicationListener<ContextRefreshedEvent> 
 
     @Scheduled(cron = "0/30 * * * * ?")
     public void cronTest() {
-        clientMain.sendCron("ok", false);
+        clientMain.sendCron(8001,"ok", false);
     }
 
     @Override
