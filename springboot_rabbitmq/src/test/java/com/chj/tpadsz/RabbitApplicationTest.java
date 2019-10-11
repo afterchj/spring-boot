@@ -33,13 +33,12 @@ public class RabbitApplicationTest {
 //        Thread.sleep(10000);
         System.out.println("-------------------------------分割线-------------------------------");
         for (int i = 1; i < 101; i++) {
-            if (i % 2 == 0) {
-                topicSender.send(i);
-            }else if (i%3==0){
-                topicSender.send1(i);
-            }else {
-                topicSender.send2(i);
-            }
+            topicSender.send(i);
+//            if (i % 2 == 0) {
+//                topicSender.send1(i);
+//            }else {
+//                topicSender.send2(i);
+//            }
 //            queueSender.sendObj(new User(i, "test" + i));
 //            queueSender.send(i);
         }

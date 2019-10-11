@@ -1,5 +1,7 @@
 package com.chj.tpadsz.topic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
@@ -11,18 +13,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicReceiver {
 
-    @RabbitListener(queues = "topic.messages")
-    public void process1(Message message) {
-        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
-    }
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RabbitListener(queues = "topic.test.message")
-    public void process2(Message message) {
-        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
+    @RabbitListener(queues = "topic.test.demo")
+    public void process1(Message message) {
+        logger.warn("receive topic.test.demo msg {}", new String(message.getBody()));
     }
 
     @RabbitListener(queues = "topic.spring.demo.message")
+    public void process2(Message message) {
+        logger.warn("receive topic.spring.demo.message {}" ,new String(message.getBody()));
+    }
+
+    @RabbitListener(queues = "topic.spring.demo")
     public void process3(Message message) {
-        System.out.println(message.getMessageProperties().getReceivedRoutingKey() + " " + new String(message.getBody()));
+        logger.warn("receive topic.spring.demo {}", new String(message.getBody()));
     }
 }

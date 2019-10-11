@@ -17,6 +17,11 @@ public class RabbitConfig {
     }
 
     @Bean
+    public Queue TPADQueue() {
+        return new Queue("tpad-blt-console-queue");
+    }
+
+    @Bean
     public Queue objectQueue() {
         return new Queue("hello-object");
     }

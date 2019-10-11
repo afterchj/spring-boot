@@ -17,7 +17,7 @@ public class TopicSender {
 
     public void send(int i) {
         String context = "hi, i am message all ";
-        this.rabbitTemplate.convertAndSend("topic_exchange", "topic.demo", context + i);
+        this.rabbitTemplate.convertAndSend("topic_exchange", "topic.test.demo", context + i);
     }
 
     public void send1(int i) {
