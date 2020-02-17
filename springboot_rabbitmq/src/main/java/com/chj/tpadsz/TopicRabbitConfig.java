@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TopicRabbitConfig {
 
-    final static String message = "topic.demo";
-    final static String messages = "topic.spring.test";
+    final static String message = "topic.test.demo";
+    final static String messages = "topic.spring.demo";
 
     @Bean
     public Queue queueMessage() {
