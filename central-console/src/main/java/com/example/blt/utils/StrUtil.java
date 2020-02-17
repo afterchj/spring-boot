@@ -9,7 +9,7 @@ import com.example.blt.entity.LightInfo;
 public class StrUtil {
 
     public static LightInfo buildLightInfo(String str) {
-        LightInfo lightInfo=new LightInfo();
+        LightInfo lightInfo = new LightInfo();
         String msg = str.replace(" ", "").toLowerCase();
         String prefix = msg.substring(0, 8);
         String lmac = msg.substring(8, 20);
@@ -20,15 +20,15 @@ public class StrUtil {
         lightInfo.setProduct_id(productId);
         String[] strArr = buildStr(lmac);
         StringBuffer sortMac = new StringBuffer();
-        for (int i = strArr.length-1; i >= 0; i--) {
-            if (i!=0){
+        for (int i = strArr.length - 1; i >= 0; i--) {
+            if (i != 0) {
                 sortMac.append(strArr[i] + ":");
-            }else {
+            } else {
                 sortMac.append(strArr[i]);
             }
         }
         lightInfo.setLmac(sortMac.toString());
-        System.out.println(JSON.toJSONString(strArr)+"<-sortMac->" + sortMac.toString());
+        System.out.println(JSON.toJSONString(strArr) + "<-sortMac->" + sortMac.toString());
         return lightInfo;
     }
 
@@ -40,7 +40,7 @@ public class StrUtil {
         buildLightInfo(str);
     }
 
-    public static String[] buildStr(String str ){
+    public static String[] buildStr(String str) {
         char[] chars = str.toCharArray();
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < chars.length; i++) {
@@ -54,6 +54,6 @@ public class StrUtil {
                 buffer.append(chars[i]);
             }
         }
-       return buffer.toString().split(":");
+        return buffer.toString().split(":");
     }
 }

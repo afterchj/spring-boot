@@ -12,7 +12,9 @@ import org.apache.rocketmq.common.message.Message;
  */
 public class Producer {
     public static void main(String[] args) throws MQClientException {
-
+        for(int i=0;i<100;i++){
+            pushMsg("Test times "+i);
+        }
     }
 
     public static void pushMsg(String msg) {
@@ -21,7 +23,7 @@ public class Producer {
         producer.setInstanceName("rmq-push");
         try {
             producer.start();
-            Message message = new Message("demo-topic-test", "test-tag", msg.getBytes());
+            Message message = new Message("blt_remote_topic", "test_tag", msg.getBytes());
             SendResult result = producer.send(message);
             System.out.println("result=" + result.getSendStatus());
         } catch (Exception e) {

@@ -16,7 +16,7 @@ public class Main {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("consumer_group");
         consumer.setNamesrvAddr("119.3.49.192:9876");
         try {
-            consumer.subscribe("blt_remote_topic", "");
+            consumer.subscribe("demo-topic-test", "");
             consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
                 for (MessageExt msg : msgs) {
                     System.out.println("body=" + new String(msg.getBody()));
