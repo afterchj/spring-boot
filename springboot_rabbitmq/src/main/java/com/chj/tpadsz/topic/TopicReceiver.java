@@ -16,17 +16,17 @@ public class TopicReceiver {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @RabbitListener(queues = "topic.test.demo")
-    public void process1(Message message) {
-        logger.warn("receive topic.test.demo msg {}", new String(message.getBody()));
+    public void process1(String message) {
+        logger.warn("receive topic.test.demo msg {}", message);
     }
 
     @RabbitListener(queues = "topic.spring.demo.message")
-    public void process2(Message message) {
-        logger.warn("receive topic.spring.demo.message {}" ,new String(message.getBody()));
+    public void process2(String message) {
+        logger.warn("receive topic.spring.demo.message {}" ,message);
     }
 
     @RabbitListener(queues = "topic.spring.demo")
-    public void process3(Message message) {
-        logger.warn("receive topic.spring.demo {}", new String(message.getBody()));
+    public void process3(String message) {
+        logger.warn("receive topic.spring.demo {}", message);
     }
 }
