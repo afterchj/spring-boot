@@ -17,7 +17,7 @@ public interface SysUserMapper {
     @Select("SELECT * FROM sys_user WHERE name = #{name}")
     SysUser selectByName(String name);
 
-    @Insert("INSERT INTO sys_user(name,password) VALUES(#{name},#{password})")
+    @Insert("INSERT INTO sys_user(name,password,salt) VALUES(#{name},#{password},#{salt})")
     void insert(SysUser user);
 
 }

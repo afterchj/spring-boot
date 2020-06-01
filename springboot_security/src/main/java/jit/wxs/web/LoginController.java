@@ -9,10 +9,13 @@ import jit.wxs.service.SysRoleService;
 import jit.wxs.service.SysUserRoleService;
 import jit.wxs.service.SysUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +36,8 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private SysUserService userService;
 
@@ -87,14 +92,15 @@ public class LoginController {
         if (userService.selectByName(name) != null) {
             throw new Exception("用户名已被注册");
         }
-
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+//        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        String salt = BCrypt.gensalt();
+        user.setPassword(BCrypt.hashpw(user.getPassword(), salt));
+        user.setSalt(salt);
         userService.insert(user);
         int id = userService.selectByName(name).getId();
         for (Integer roleId : roles) {
             userRoleService.insert(id, roleId);
         }
-
         return "redirect:/login";
     }
 
@@ -104,9 +110,8 @@ public class LoginController {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
 
         SysUser user = userService.selectByName(name);
-        System.out.println("user:" + JSON.toJSONString(user));
         List<SysUserRole> userRoles = userRoleService.listByUserId(user.getId());
-        System.out.println("userRoles:" + JSON.toJSONString(userRoles));
+        logger.warn("userRoles {}", JSON.toJSONString(userRoles));
         List<SysRole> roles = new ArrayList<>();
         for (SysUserRole userRole : userRoles) {
             SysRole role = roleService.selectById(userRole.getRoleId());
@@ -116,7 +121,7 @@ public class LoginController {
         Map<String, Object> map = new HashMap<>(16);
         map.put("name", name);
         map.put("roles", roles);
-        System.out.println("roles:" + JSON.toJSONString(roles));
+        logger.warn("roles {}", JSON.toJSONString(roles));
         return new Msg<>(true, null, map);
     }
 

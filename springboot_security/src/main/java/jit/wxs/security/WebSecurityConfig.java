@@ -2,6 +2,7 @@ package jit.wxs.security;
 
 import jit.wxs.filter.VerifyFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,8 +12,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -45,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-            .passwordEncoder(new PasswordEncoder() {
+            .passwordEncoder(new BCryptPasswordEncoder() {
                 @Override
                 public String encode(CharSequence rawPassword) {
                     return new BCryptPasswordEncoder().encode(rawPassword);
@@ -71,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .failureUrl("/login/error").permitAll()
                 .and()
-                .addFilterBefore(new VerifyFilter(),UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new VerifyFilter(),CustomUserAuthenticationFilter.class)
                 .logout().permitAll()
                 // 自动登录
                 .and().rememberMe()
