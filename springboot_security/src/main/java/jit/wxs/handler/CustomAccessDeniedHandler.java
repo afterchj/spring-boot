@@ -23,7 +23,7 @@ import java.io.PrintWriter;
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-    private Logger logegr = LoggerFactory.getLogger(CustomAccessDeniedHandler.class);
+    private Logger logger = LoggerFactory.getLogger(CustomAccessDeniedHandler.class);
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
@@ -32,7 +32,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         if (!response.isCommitted()) {
             if (isAjax) {
                 String msg = accessDeniedException.getMessage();
-                logegr.warn("accessDeniedException.message {}", msg);
+                logger.warn("accessDeniedException.message {}", msg);
                 String accessDenyMsg = "{\"code\":\"403\",\"msg\":\"没有权限\"}";
                 ControllerTools.print(response, accessDenyMsg);
             } else {
