@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 // 设置登陆成功页
                 .defaultSuccessUrl("/main")
-                .failureUrl("/login/error").permitAll()
+                .failureUrl("/login?error").permitAll()
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(customAccessDeniedHandler) //无权限处理器
