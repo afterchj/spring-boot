@@ -70,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .failureUrl("/login/error").permitAll()
                 .and()
-                .addFilterBefore(new VerifyFilter(),CustomUserAuthenticationFilter.class)
+//                .addFilterBefore(new VerifyFilter(),CustomUserAuthenticationFilter.class)
                 .logout().permitAll()
                 // 自动登录
                 .and().rememberMe()

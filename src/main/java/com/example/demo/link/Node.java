@@ -25,7 +25,7 @@ public class Node {
     }
 
     // 实现节点的添加:
-    // 第一次调用（LinkTest）：this代表Link.root
+    // 第一次调用（link）：this代表Link.root
     // 第二次调用（Node）：this代表Link.root.next
     // 第三次调用（Node）：this代表Link.root.next.next
     public void addNode(Node newNode) {
@@ -36,7 +36,7 @@ public class Node {
         }
     }
 
-    // 第一次调用（LinkTest）：this代表Link.root
+    // 第一次调用（link）：this代表Link.root
     // 第二次调用（Node）：this代表Link.root.next
     // 第三次调用（Node）：this代表Link.root.next.next
     public void printNode() {
