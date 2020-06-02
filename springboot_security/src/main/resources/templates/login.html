@@ -1,52 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"><!-- 1 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>登陆</title>
-    <linkTest rel="stylesheet" th:href="@{/static/css/bootstrap.css}">
-    <linkTest rel="stylesheet" th:href="@{/static/css/login.css}">
+<meta charset="UTF-8">
+<title>登录页面</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" th:href="@{/layui/css/layui.css}" media="all">
+<link rel="stylesheet" th:href="@{/css/login.css}" media="all">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-6">
-            <form class="form-horizontal" action="/login" method="post">
-                <span class="heading">用户登录</span>
-                <div class="form-group">
-                    <input type="text" class="form-control" name="username" placeholder="用户名" required>
-                </div>
-                <div class="form-group help">
-                    <input type="password" class="form-control" name="password" placeholder="密码" required>
-                </div>
-                <div class="form-group help">
-                    <input type="text" class="form-control" name="verifyCode" placeholder="验证码" required>
-                </div>
-                <div class="form-group">
-                    <img src="getVerifyCode" title="看不清，请点我" onclick="refresh(this)" onmouseover="mouseover(this)"/>
-                    <label style="margin-left: 50px"><input type="checkbox" name="remember-me"/>自动登录</label>
-                    <a href="/register" style="margin-left: 50px">没有账号？立即注册</a>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">登录</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script th:src="@{/static/js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{/static/js/bootstrap.js}"></script>
-<script>
-    function refresh(obj) {
-        obj.src = "getVerifyCode?" + Math.random();
-    }
-
-    function mouseover(obj) {
-        obj.style.cursor = "pointer";
-    }
-</script>
+	<div class="login-main">
+		<h1 class="layui-elip">Spring Security 集成演示系统</h1>
+		<form class="layui-form" action="/login" method="post">
+			<div class="layui-input-inline">
+				<!--<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
+				<input type="text" name="username" required placeholder="用户名" autocomplete="off" class="layui-input">
+			</div>
+			<div class="layui-input-inline">
+				<input type="password" name="password" required  placeholder="密码" autocomplete="off"
+					class="layui-input">
+			</div>
+			<div class="layui-input-inline login-btn">
+				<button id="btnLogin" lay-submit lay-filter="*" class="layui-btn">登录</button>
+			</div>
+			<div class="form-message">
+				<label th:text="${error}"></label>
+				<label th:text="${msg}"></label>
+			</div>
+		</form>
+	</div>
+	<script type="text/javascript" th:src="@{/layui/layui.js}"></script>
+	<script type="text/javascript">
+		layui.use('form', function() {
+			var form = layui.form;
+		});
+	</script>
 </body>
 </html>
