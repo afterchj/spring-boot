@@ -65,9 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();//解决 in a frame because it set 'X-Frame-Options' to 'DENY' 问题
         http.authorizeRequests()
                 // 如果有允许匿名的url，填在下面
-                .antMatchers("/register", "/getVerifyCode", "/initUserData").permitAll()
-                .anyRequest()
-                .access("@rolePermission.hasPermission(request, authentication)")//根据账号权限访问
+                .antMatchers("/eureka","/register", "/getVerifyCode", "/initUserData").permitAll()
+//                .anyRequest()
+//                .access("@rolePermission.hasPermission(request, authentication)")//根据账号权限访问
                 .and()
                 // 设置登陆页
                 .formLogin().loginPage("/login")
@@ -86,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 有效时间：单位s
                 .tokenValiditySeconds(60)
                 .userDetailsService(userDetailsService);
-        http.csrf().disable();//注释就是使用 csrf 功能
+        http.csrf().disable().httpBasic();//注释就是使用 csrf 功能
     }
 
     @Override

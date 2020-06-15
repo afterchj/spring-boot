@@ -7,6 +7,10 @@
 		<result property="username" column="username"/>
 		<result property="password" column="password"/>
 	</resultMap>
+
+	<select id="getAll" resultType="map">
+		SELECT id,username FROM t_user
+	</select>
 	<!-- 根据用户名查找用户 -->
 	<select id="getUserByUsername" resultMap="user">
 		select * from t_user where username=#{username}

@@ -17,9 +17,8 @@ public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping(value = {"/", "/login"})
-    public ModelAndView login(@RequestParam(value = "error", required = false) String error,
-                              @RequestParam(value = "logout", required = false) String logout) {
+    @GetMapping(value = {"/login"})
+    public ModelAndView login(String error, String logout) {
         ModelAndView mav = new ModelAndView();
         if (error != null) {
             mav.addObject("error", "用户名或者密码不正确");
