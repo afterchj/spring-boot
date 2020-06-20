@@ -13,14 +13,22 @@ public abstract class BaseEntity implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4034437877924885763L;
-	protected Long id;//ID
+	protected Integer id;//ID
 	protected Integer state;//状态
 	protected String creator;//创建人
 	protected String createTime;//创建时间
 	protected String updator;//修改人
 	protected String updateTime;//修改时间
 	protected Boolean deleted=false;//删除标志
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -51,12 +59,7 @@ public abstract class BaseEntity implements Serializable {
 	public void setUpdator(String updator) {
 		this.updator = updator;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public Integer getState() {
 		return state;
 	}

@@ -1,6 +1,8 @@
 package jit.wxs;
 
 import com.alibaba.fastjson.JSON;
+import jit.wxs.dao.RoleDao;
+import jit.wxs.model.Role;
 import jit.wxs.model.UserEntity;
 import jit.wxs.service.RoleService;
 import jit.wxs.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RunWith(SpringRunner.class)
@@ -23,6 +26,9 @@ public class SpringBootSecurityApplicationTests {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Test
     public void testAddUser() {
@@ -40,8 +46,10 @@ public class SpringBootSecurityApplicationTests {
 
     @Test
     public void test() {
-        for (int i = 0; i < 3; i++) {
-            System.out.println(BCrypt.gensalt());
-        }
+        List<Role> roles = roleDao.getUserRoleByUserId(1);
+        System.out.println("roles="+JSON.toJSONString(roles));
+//        for (int i = 0; i < 3; i++) {
+//            System.out.println(BCrypt.gensalt());
+//        }
     }
 }

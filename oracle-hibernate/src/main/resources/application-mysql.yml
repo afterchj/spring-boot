@@ -1,0 +1,7 @@
+spring:
+  profiles: mysql
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rm-bp11dok2aa3314h5hfo.mysql.rds.aliyuncs.com/chenhongjian?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=GMT%2B8
+    username: chenhongjian
+    password: chj123456

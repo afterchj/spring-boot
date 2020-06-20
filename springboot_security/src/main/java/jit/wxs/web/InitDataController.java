@@ -1,6 +1,7 @@
 package jit.wxs.web;
 
 import jit.wxs.model.UserEntity;
+import jit.wxs.model.dd.ResultDict;
 import jit.wxs.service.RoleService;
 import jit.wxs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,12 @@ public class InitDataController {
     }
 
     @RequestMapping("/userList")
-    public List getAllUser() {
+    public Map getAllUser() {
+        Map result = new HashMap();
+        result.put("code", ResultDict.SUCCESS.getCode());
+        result.put("msg", ResultDict.SUCCESS.getValue());
         List<Map> u = userService.getAll();
-        return u;
+        result.put("data", u);
+        return result;
     }
 }

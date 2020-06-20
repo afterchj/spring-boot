@@ -13,7 +13,7 @@ public class UserEntity implements UserDetails {
 	 */
 	private static final long serialVersionUID = -9005214545793249372L;
 
-	private Long id;// 用户id
+	private Integer id;// 用户id
 	private String username;// 用户名
 	private String password;// 密码
 	private List<Role> userRoles;// 用户权限集合
@@ -32,11 +32,11 @@ public class UserEntity implements UserDetails {
 		this.roleMenus = roleMenus;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

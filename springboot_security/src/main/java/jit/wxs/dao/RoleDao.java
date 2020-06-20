@@ -13,7 +13,7 @@ public interface RoleDao {
      * @param id
      * @return
      */
-    List<Role> getUserRoleByUserId(Long id);
+    List<Role> getUserRoleByUserId(int id);
 
     List<Map> getAll();
 
