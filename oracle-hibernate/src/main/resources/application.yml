@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: mysql
+########################################################
+### Java Persistence Api --  Spring jpa ?????????
+# Specify the DBMS
+  jpa:
+    database: MYSQL
+# Show or not log for each sql query
+    show-sql: true
+    hibernate.show-sql.format-sql: true
+# Hibernate ddl auto (create, create-drop, update)
+    hibernate.ddl-auto: update
+# Naming strategy
+#[org.hibernate.cfg.ImprovedNamingStrategy  #org.hibernate.cfg.DefaultNamingStrategy]
+    hibernate.naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#    properties:
+#      hibernate:
+#        enable_lazy_load_no_trans: true
+# stripped before adding them to the entity manager)
+#\u5F00\u542FMybatis\u4E0B\u5212\u7EBF\u547D\u540D\u8F6C\u9A7C\u5CF0\u547D\u540D

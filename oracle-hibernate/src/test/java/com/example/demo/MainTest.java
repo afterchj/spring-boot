@@ -17,20 +17,20 @@ public class MainTest {
 
     }
 
-    @Test
-    public void testHibernate(){
-        EntityManager em = SpringUtil.getEntityManager().createEntityManager();
-        try {
-//            Query query = em.createNativeQuery("select * from T_USER p where p.id = ?1",User.class);
-            Query query = em.createQuery("from User p where p.id = ?1 and p.name=:name",User.class);
-            query.setParameter(1, 1);
-            query.setParameter("name", "毕胜");
-            User info = (User) query.getSingleResult();
-            System.out.println("id="+info.getName()+",age="+info.getAge());
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+//    @Test
+//    public void testHibernate(){
+//        EntityManager em = SpringUtil.getEntityManager().createEntityManager();
+//        try {
+////            Query query = em.createNativeQuery("select * from T_USER p where p.id = ?1",User.class);
+//            Query query = em.createQuery("from User p where p.id = ?1 and p.name=:name",User.class);
+//            query.setParameter(1, 1);
+//            query.setParameter("name", "毕胜");
+//            User info = (User) query.getSingleResult();
+//            System.out.println("id="+info.getName()+",age="+info.getAge());
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+//    }
 }
