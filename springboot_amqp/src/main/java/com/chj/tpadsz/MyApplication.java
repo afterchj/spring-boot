@@ -42,7 +42,7 @@ public class MyApplication implements CommandLineRunner {
 //        producer.send();
 //        ActiveMQObjectMessage objectMessage=new ActiveMQObjectMessage();
 //        objectMessage.setObject( new User(101, "after"));
-//        template.convertAndSend(queue,"test is ok");
+//        templates.convertAndSend(queue,"test is ok");
         template.send("after-destination",new Msg());
     }
 }

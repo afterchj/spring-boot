@@ -28,7 +28,7 @@ public enum SMSContains {
 
 //    public static void main(String[] args) {
 //        for (SMSContains contains:SMSContains.values()){
-//            System.out.println("sender="+contains.getSender()+",template="+contains.getTemplate());
+//            System.out.println("sender="+contains.getSender()+",templates="+contains.getTemplate());
 //        }
 //    }
 }
