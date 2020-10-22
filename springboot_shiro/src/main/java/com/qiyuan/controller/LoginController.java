@@ -66,8 +66,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/list")
-    public String list(Model model) {
-        List<User> users = userService.findAll();
+    public String list(Model model, String ids) {
+        List<User> users = userService.selectByIds(ids);
         System.out.println(JSON.toJSONString(users));
         model.addAttribute("users", users);
         return "list";

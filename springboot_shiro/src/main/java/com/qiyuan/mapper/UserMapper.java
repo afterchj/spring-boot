@@ -2,10 +2,7 @@ package com.qiyuan.mapper;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.qiyuan.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -17,6 +14,8 @@ import java.util.List;
  * @author jitwxs
  * @since 2018-03-20
  */
+
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
     @Select("SELECT * FROM user WHERE name = #{name}")
     User findByName(@Param("name") String name);
@@ -29,5 +28,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Update("UPDATE user SET name=#{name},password=#{password},modified_date=NOW() WHERE id=#{id}")
     void updateUser(User user);
+
+    List<User> selectByIds(String ids);
 
 }

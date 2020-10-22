@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiyuan.mapper.UserMapper">
+
+    <select id="selectByIds" parameterType="string" resultType="User">
+        select * from user
+        <where>
+            <if test="_parameter != null and _parameter !=''">
+                id in (${_parameter})
+            </if>
+        </where>
+    </select>
+</mapper>

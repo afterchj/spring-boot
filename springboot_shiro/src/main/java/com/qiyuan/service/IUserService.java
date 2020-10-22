@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author jitwxs
@@ -15,7 +15,12 @@ import java.util.List;
  */
 public interface IUserService extends IService<User> {
     User findByName(String name);
+
     List<User> findAll();
+
+    List<User> selectByIds(String ids);
+
     void insertUser(User user);
+
     void updateUser(User user);
 }

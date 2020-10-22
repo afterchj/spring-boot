@@ -17,6 +17,7 @@ public class Main {
         String hashAlgorithmName = "MD5";//加密方式
         String simpleHash = new SimpleHash(hashAlgorithmName, credentials, "abc", hashIterations).toHex();
         String newPs = new SimpleHash("MD5", credentials, salt, 2).toHex();
+        System.out.println("salt ="+salt+" newPs ="+newPs);
         System.out.println(newPs.equals(simpleHash)+"<-----加密后的值----->" + simpleHash);
     }
 

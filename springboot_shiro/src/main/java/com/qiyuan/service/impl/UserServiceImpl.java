@@ -32,6 +32,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    public List<User> selectByIds(String ids) {
+        return baseMapper.selectByIds(ids);
+    }
+
+    @Override
     public void insertUser(User user) {
         // 将用户名作为盐值
         ByteSource salt = ByteSource.Util.bytes("abc");

@@ -1,12 +1,10 @@
 package com.qiyuan.config;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.qiyuan.entity.*;
 import com.qiyuan.service.*;
 import com.qiyuan.service.IUserService;
-import com.qiyuan.entity.*;
-import com.qiyuan.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -15,6 +13,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.List;
  * @date 2018/3/20 9:35
  */
 
+@Slf4j
 public class ShiroRealm extends AuthorizingRealm {
 
     @Autowired
@@ -54,9 +54,11 @@ public class ShiroRealm extends AuthorizingRealm {
         String name = token.getPrincipal().toString();
 //        String password = new String((char[]) token.getCredentials());
         User user = userService.findByName(name);
-        String credentials=user.getPassword();
+        log.warn("user {}", user);
+        String credentials = user.getPassword();
         if (user != null) {
             ByteSource salt = ByteSource.Util.bytes(user.getSalt());
+            log.warn("salt {}", salt);
             //验证authenticationToken和simpleAuthenticationInfo的信息
             info = new SimpleAuthenticationInfo(name, credentials, salt, getName());
         } else {
