@@ -7,19 +7,26 @@ import com.example.demo.entity.UserVo;
 import com.example.demo.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class MyDemoApplicationTests {
+    Logger logger = LoggerFactory.getLogger(MyDemoApplicationTests.class);
 
     @Test
-    public void contextLoads() {
+    public void contextLoads() throws Exception {
+        run();
     }
 
     @Autowired
@@ -55,6 +62,17 @@ public class MyDemoApplicationTests {
     public void testRedis() {
         redisDao.setKey("name", "admin.chen");
         redisDao.setKey("age", "23");
-        System.out.println("redis test="+redisDao.getValue("name"));
+        System.out.println("redis test=" + redisDao.getValue("name"));
+    }
+
+    public void run() throws Exception {
+        ExecutorService es = Executors.newCachedThreadPool();
+        for (int i = 0; i < 1000; i++) {
+            int temp = i;
+            es.execute(() -> {
+                logger.warn("index {}", temp);
+            });
+        }
+        logger.warn("execute...");
     }
 }

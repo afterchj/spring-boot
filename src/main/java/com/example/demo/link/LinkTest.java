@@ -4,7 +4,7 @@ package com.example.demo.link;
  * @author hongjian.chen
  * @date 2020/3/4 17:04
  */
-public class link {
+public class LinkTest {
     private Node root; //新建根节点
 
     public void addTest(String data) {
@@ -26,7 +26,7 @@ public class link {
     }
 
     public static void main(String[] args) {
-        link link = new link();
+        LinkTest link = new LinkTest();
         link.addTest("hello");   //增加节点
         link.addTest("world");
         link.addTest("www");
