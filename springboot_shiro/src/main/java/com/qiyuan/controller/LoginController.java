@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author jitwxs
@@ -40,24 +41,31 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(User user, boolean rememberMe) {
-
-        Subject currentUser = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getName(), user.getPassword(), rememberMe);
-        //进行验证，这里可以捕获异常，然后返回对应信息
-        currentUser.login(usernamePasswordToken);
-        System.out.println("user:" + user.toString());
-        if (currentUser.isAuthenticated()) {
-            return "home";
-        } else {
-            usernamePasswordToken.clear();
+        try {
+            System.out.println("user:" + user.toString());
+            Subject currentUser = SecurityUtils.getSubject();
+            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(user.getName(), user.getPassword(), rememberMe);
+            //进行验证，这里可以捕获异常，然后返回对应信息
+            currentUser.login(usernamePasswordToken);
+            if (currentUser.isAuthenticated()) {
+                return "home";
+            } else {
+                usernamePasswordToken.clear();
+                return "redirect:login";
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
             return "redirect:login";
         }
     }
 
+
     @RequestMapping("/save")
     public String save(User user) {
         System.out.println("id=" + user.getId());
-        if ("".equals(user.getId())) {
+        if (user.getId() == null || "".equals(user.getId())) {
+            String id = user.getId() == null ? String.valueOf(new Random().nextInt(100)) : user.getId();
+            user.setId(id);
             userService.insertUser(user);
         } else {
             userService.updateUser(user);
@@ -71,6 +79,11 @@ public class LoginController {
         System.out.println(JSON.toJSONString(users));
         model.addAttribute("users", users);
         return "list";
+    }
+
+    @RequestMapping(value = "/createUI")
+    public String creat() {
+        return "create";
     }
 
     @GetMapping("/editUI")

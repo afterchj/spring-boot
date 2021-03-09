@@ -57,10 +57,10 @@ public class ShiroRealm extends AuthorizingRealm {
         log.warn("user {}", user);
         String credentials = user.getPassword();
         if (user != null) {
-            ByteSource salt = ByteSource.Util.bytes(user.getSalt());
-            log.warn("salt {}", salt);
+//            ByteSource salt = ByteSource.Util.bytes(user.getSalt());
+//            log.warn("salt {}", salt);
             //验证authenticationToken和simpleAuthenticationInfo的信息
-            info = new SimpleAuthenticationInfo(name, credentials, salt, getName());
+            info = new SimpleAuthenticationInfo(name, credentials, getName());
         } else {
             throw new AuthenticationException();
         }

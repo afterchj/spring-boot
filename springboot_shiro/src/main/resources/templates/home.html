@@ -10,7 +10,7 @@
 <div shiro:authenticated="true">
     <span>欢迎您：<span th:text="${user.name}"></span></span>
 </div>
-<a href="/admiCreate">测试是否是[admin]身份，且具有[create]权限</a><br>
+<a th:href="@{/createUI}">测试是否是[admin]身份，且具有[create]权限</a><br>
 <a th:href="@{/list}">用户信息</a>
 <!--<a th:href="@{'/editUI?id='+${user.id}}">编辑用户信息</a>-->
 <br>

@@ -2,6 +2,7 @@ package com.qiyuan.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -97,7 +98,7 @@ public class ShiroConfig {
     @Bean
     public ShiroRealm shiroRealm() {
         ShiroRealm myShiroRealm = new ShiroRealm();
-        myShiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        myShiroRealm.setCredentialsMatcher(new SimpleCredentialsMatcher());
         return myShiroRealm;
     }
 

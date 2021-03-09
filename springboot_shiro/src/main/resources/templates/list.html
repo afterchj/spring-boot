@@ -43,7 +43,7 @@
                             <a th:href="@{'/editUI?id='+${user.id}}">更新</a>
                         </li>
                         <li>
-                            <a href="/select">插看</a>
+                            <a th:href="@{'/editUI?id='+${user.id}}">查看用户</a>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,7 @@
                             <a href="/create">添加用户</a>
                         </li>
                         <li>
-                            <a href="/select">插看用户</a>
+                            <a th:href="@{'/editUI?id='+${user.id}}">查看用户</a>
                         </li>
                     </ul>
                 </div>
@@ -62,7 +62,7 @@
                 <div shiro:hasRole="student">
                     <ul>
                         <li>
-                            <a href="/select">插看用户</a>
+                            <a th:href="@{'/editUI?id='+${user.id}}">查看用户</a>
                         </li>
                     </ul>
                 </div>
@@ -71,7 +71,7 @@
         <div shiro:hasPermission="create">
             <tr>
                 <td colspan="3" style="text-align: left">
-                    <a href="/editUI">新增用户</a>
+                    <a th:href="@{/createUI}">新增用户</a>
                 </td>
             </tr>
         </div>
