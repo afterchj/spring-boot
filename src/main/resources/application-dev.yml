@@ -1,0 +1,32 @@
+serve:
+  port: 9090
+
+spring:
+  #邮箱配置
+  mail:
+    host: smtp.163.com
+    username: after_chj@163.com
+    #QQ邮箱的授权码
+    password: auth001
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+  freemarker:
+    content-type: text/html
+    #后缀名
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+    charset: UTF-8
+    check-template-location: true
+
+#freemarker配置
+
+#设置一个邮件发送人
+my:
+  mail:
+    sender: after_chj@163.com
