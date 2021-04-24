@@ -14,9 +14,9 @@ public class Main {
 
     public static void consumerMsg() {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("consumer_group");
-        consumer.setNamesrvAddr("119.3.49.192:9876");
+        consumer.setNamesrvAddr("172.26.171.218:9876");
         try {
-            consumer.subscribe("demo-topic-test", "");
+            consumer.subscribe("test_topic", "");
             consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
                 for (MessageExt msg : msgs) {
                     System.out.println("body=" + new String(msg.getBody()));

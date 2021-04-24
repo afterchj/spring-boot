@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * Created by hongjian.chen on 2018/12/27.
  */
 @Component
-@RabbitListener(queues = "hello-queue")
+@RabbitListener(queues = "topic.test-queue")
 public class QueueRecive {
     private Logger logger = LoggerFactory.getLogger(QueueRecive.class);
 

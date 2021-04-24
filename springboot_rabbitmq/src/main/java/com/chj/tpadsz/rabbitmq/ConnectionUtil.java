@@ -11,11 +11,11 @@ import java.util.concurrent.TimeoutException;
  */
 public class ConnectionUtil {
 
-    private static final String RABBIT_HOST = "119.3.49.192";
+    private static final String RABBIT_HOST = "127.0.0.1";
 
-    private static final String RABBIT_USERNAME = "admin";
+    private static final String RABBIT_USERNAME = "guest";
 
-    private static final String RABBIT_PASSWORD = "admin";
+    private static final String RABBIT_PASSWORD = "guest";
 
     private static Connection connection = null;
 

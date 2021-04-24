@@ -17,20 +17,10 @@ import java.util.Map;
 public class DemoConreoller {
 
     @Autowired
-    DemoServiceConsume consumeService;
-
-    @GetMapping("/v0")
-    public Map test0() {
-        return consumeService.test0();
-    }
+   private DemoServiceConsume consumeService;
 
     @GetMapping("/v1")
     public String test1() {
         return consumeService.test1();
-    }
-
-    @GetMapping("/v2")
-    public String test2() {
-        return consumeService.test2();
     }
 }

@@ -1,12 +1,8 @@
 package com.example.demo;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.example.demo.exception.InvalidCodeException;
-import com.example.demo.service.dubbo.MsgServiceConsume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,7 +21,7 @@ public class DubboClientApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println("test version=" +JSON.parseArray("[556677]"));
+        System.out.println("test version=" + JSON.parseArray("[556677]"));
     }
 //
 //    @Test

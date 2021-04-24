@@ -1,0 +1,20 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: provider-service
+  main:
+    allow-bean-definition-overriding: true
+dubbo:
+  application:
+    name: provider-service
+  registry:
+    address: nacos://127.0.0.1:8848
+    username: nacos
+    password: nacos
+    group: dubbo_group
+  scan:
+    base-packages: com.example.demo.service
+  protocol:
+    name: dubbo
+    port: -1

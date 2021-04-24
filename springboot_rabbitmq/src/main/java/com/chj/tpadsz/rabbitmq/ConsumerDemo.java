@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class ConsumerDemo {
 
-    private static final String QUEUE_NAME = "test_queue";
+    private static final String QUEUE_NAME = "topic.test-demo";
 
     public static void main(String[] args) throws IOException {
         Connection connection = ConnectionUtil.getConnection();

@@ -24,6 +24,11 @@
     </properties>
 
     <dependencies>
+        <!-- Spring Boot Web 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- Spring Boot Dubbo 依赖 -->
         <dependency>
             <groupId>io.dubbo.springboot</groupId>
@@ -31,16 +36,10 @@
             <version>${dubbo-spring-boot}</version>
         </dependency>
 
-        <!-- Spring Boot Web 依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.tpadsz.after</groupId>
-            <artifactId>blt-light-api</artifactId>
-            <version>1.0-RELEASE</version>
+            <groupId>org.example</groupId>
+            <artifactId>common-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
