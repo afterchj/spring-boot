@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
     @Autowired

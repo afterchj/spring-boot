@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  */
 
 @Service
-@RocketMQMessageListener(topic = "blt_remote_topic", consumerGroup = "my-consumer_test-topic-2")
+@RocketMQMessageListener(topic = "test_topic", consumerGroup = "my-consumer_test-topic-2")
 public class Consumer implements RocketMQListener<String> {
 
 

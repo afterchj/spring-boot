@@ -46,7 +46,7 @@ public class UserController {
 
     @ApiOperation(value = "更新信息", notes = "根据url的id更新用户信息")
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Info updateInfo(@PathVariable Long id, @RequestBody Info info) {
+    public Info updateInfo(@PathVariable long id, @RequestBody Info info) {
         Info info1 = new Info();
         info1.setId(id);
         info1.setUserName(info.getUserName());
