@@ -6,7 +6,10 @@
     <groupId>com.example</groupId>
     <artifactId>spring-boot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <modules>
+        <module>common-api</module>
+    </modules>
+    <packaging>pom</packaging>
 
     <description>Demo project for Spring Boot</description>
 
