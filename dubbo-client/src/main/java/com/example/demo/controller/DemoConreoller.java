@@ -17,7 +17,7 @@ import java.util.Map;
 public class DemoConreoller {
 
     @Autowired
-   private DemoServiceConsume consumeService;
+    private DemoServiceConsume consumeService;
 
     @GetMapping("/v1")
     public String test1() {
