@@ -12,7 +12,7 @@ dubbo:
     qos-enable: false
     qos-accept-foreign-ip: false
   registry:
-    address: nacos://172.24.230.37:8848
+    address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
   scan:

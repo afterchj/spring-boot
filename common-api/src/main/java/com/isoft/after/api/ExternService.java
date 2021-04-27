@@ -1,12 +1,9 @@
 package com.isoft.after.api;
 
-/**
- * @Classname ExternService
- * @Description TODO
- * @Date 2021/4/25 11:34
- * @Created by hjchen
- */
+import com.isoft.after.constants.Result;
+import com.isoft.after.model.dto.UserDTO;
+
 public interface ExternService {
 
-    String echo(String s);
+    Result<UserDTO> login(String username, String password);
 }

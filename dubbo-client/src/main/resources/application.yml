@@ -5,6 +5,8 @@ spring:
     name: consumer-service
   main:
     allow-bean-definition-overriding: true
+  jackson:
+    default-property-inclusion: non_null
 dubbo:
   application:
     name: consumer-service
@@ -12,7 +14,9 @@ dubbo:
     address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
-    group: dubbo_group
+    check: true
+  consumer:
+    check: true
   scan:
     base-packages: com.example.demo.service
   protocol:
