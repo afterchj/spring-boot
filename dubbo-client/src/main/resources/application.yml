@@ -11,12 +11,13 @@ dubbo:
   application:
     name: consumer-service
   registry:
-    address: nacos://127.0.0.1:8848
+    address: nacos://172.26.96.1:8848
     username: nacos
     password: nacos
     check: true
+    group: dubbo_group
   consumer:
-    check: true
+    check: false
   scan:
     base-packages: com.example.demo.service
   protocol:

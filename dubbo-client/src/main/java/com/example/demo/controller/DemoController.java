@@ -6,6 +6,7 @@ import com.isoft.after.api.DemoService;
 import com.isoft.after.api.ExternService;
 import com.isoft.after.constants.Result;
 import com.isoft.after.model.dto.UserDTO;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +19,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/zoo")
-public class DemoConreoller {
+public class DemoController {
 
-    @Reference(version = "0.1.0")
+    @DubboReference(version = "0.1.0")
     public DemoService demoService;
 
-    @Reference
-    public ExternService externService;
+    @Autowired
+    public ExternServiceConsume externService;
 
     @GetMapping("/test")
     public String test1() {
