@@ -22,9 +22,15 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     private LocalDateTime createTime = LocalDateTime.now();
 
     private LocalDateTime updateTime = LocalDateTime.now();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

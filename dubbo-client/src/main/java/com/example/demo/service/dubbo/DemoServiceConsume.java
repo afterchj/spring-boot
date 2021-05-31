@@ -1,6 +1,7 @@
 package com.example.demo.service.dubbo;
 
 import com.isoft.after.api.DemoService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class DemoServiceConsume {
 
-    @Reference(version = "0.1.0")
+    @DubboReference(version = "0.2.0")
     public DemoService demoService1;
 
 
-    public String test1() {
-        return demoService1.sayName("version 1");
+    public String test() {
+        return demoService1.sayName("version 2");
     }
 }

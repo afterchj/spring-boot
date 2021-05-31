@@ -2,15 +2,12 @@ package com.example.demo.service.dubbo;
 
 import com.isoft.after.api.ExternService;
 import com.isoft.after.constants.Result;
-import com.isoft.after.exception.BaseException;
 import com.isoft.after.model.dto.UserDTO;
 import com.isoft.after.utils.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.UndeclaredThrowableException;
 
 /**
  * Created by hongjian.chen on 2018/12/12.
@@ -20,7 +17,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 @Service
 public class ExternServiceConsume {
 
-    @DubboReference
+    @DubboReference(version = "0.2.0")
     public ExternService externService;
 
     public Result<UserDTO> login(String s1, String s2) {

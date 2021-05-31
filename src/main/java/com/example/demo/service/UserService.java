@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.UserDao;
 import com.example.demo.entity.UserVo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,11 @@ public class UserService {
         userDao.insertUser(userVo);
     }
 
-    public List<UserVo> getByPage(int pageNum) {
+    public  PageInfo<UserVo> getByPage(int pageNum) {
         //开始分页
         PageHelper.startPage(pageNum, PAGE_SIZE);
         List<UserVo> list = userDao.getByPage();
-        return list;
+        PageInfo<UserVo> pageInfo=new PageInfo<>(list);
+        return pageInfo;
     }
 }

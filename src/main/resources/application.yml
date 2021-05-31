@@ -24,7 +24,7 @@ spring:
       charset: utf-8
       force: true
 my:
-    name: after
+    name: aftermysql
     age: 23
     msg: Test is ok
     number: ${random.int}

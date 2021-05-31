@@ -2,7 +2,8 @@ package com.example.demo.service.impl;
 
 import com.isoft.after.api.ExternService;
 import com.isoft.after.model.dto.UserDTO;
-import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @Classname ExternServiceImpl
@@ -11,11 +12,14 @@ import org.apache.dubbo.config.annotation.Service;
  * @Created by hjchen
  */
 
-@Service(version = "0.2.0")
+@DubboService(group = "${dubbo.provider.group}",version = "${dubbo.provider.version}")
 public class ExternServiceImpl implements ExternService {
+
+    @Value("${dubbo.provider.version}")
+    private String version;
 
     @Override
     public UserDTO login(String s, String s1) {
-        return new UserDTO().setUsername(s).setLoginType("rpc");
+        return new UserDTO().setUsername(s).setLoginType("rpc_"+version);
     }
 }

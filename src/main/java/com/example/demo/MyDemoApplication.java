@@ -1,17 +1,19 @@
 package com.example.demo;
 
 
+import org.activiti.spring.boot.SecurityAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
-
-@SpringBootApplication
+@EnableAsync //开启异步任务支持   如果Application已经开启，则这个可以省略
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 public class MyDemoApplication {
 
 

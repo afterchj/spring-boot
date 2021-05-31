@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  profiles:
+    active: dev
   application:
     name: consumer-service
   main:
@@ -11,11 +13,11 @@ dubbo:
   application:
     name: consumer-service
   registry:
-    address: nacos://172.26.96.1:8848
+    address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
-    check: true
-    group: dubbo_group
+    check: false
+    group: ${spring.profiles.active}
   consumer:
     check: false
   scan:

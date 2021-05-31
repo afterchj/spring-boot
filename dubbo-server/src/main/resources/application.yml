@@ -1,6 +1,8 @@
 server:
   port: 8000
 spring:
+  profiles:
+    active: dev
   application:
     name: provider-service
   main:
@@ -8,13 +10,17 @@ spring:
 dubbo:
   application:
     name: provider-service
-    logger: log4j2
     qos-enable: false
     qos-accept-foreign-ip: false
   registry:
     address: nacos://127.0.0.1:8848
     username: nacos
     password: nacos
+    check: false
+    group: ${spring.profiles.active}
+  provider:
+    group: ${spring.profiles.active}
+    version: 0.2.0
   scan:
     base-packages: com.example.demo.service.impl
   protocol:

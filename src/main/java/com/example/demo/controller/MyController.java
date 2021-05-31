@@ -5,6 +5,7 @@ import com.example.demo.entity.ConfigBean;
 import com.example.demo.entity.User;
 import com.example.demo.entity.UserVo;
 import com.example.demo.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +47,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "/page")
-    public String page(int pageNum) {
-        List<UserVo> list = userService.getByPage(pageNum);
-        return JSON.toJSONString(list);
+    public PageInfo<UserVo> page(int pageNum) {
+        return userService.getByPage(pageNum);
     }
 }
