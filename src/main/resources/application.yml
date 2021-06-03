@@ -1,6 +1,7 @@
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.example.demo.entity
+  config-location: classpath:mybatisConfig.xml
 spring:
   thymeleaf:
     cache: false
@@ -33,7 +34,8 @@ my:
     value: ${random.value}
     greeting: Hi,I'm ${my.name}
 logging:
-  file: /mnt/spring-boot/log.log
+  file:
+    name: /mnt/spring-boot/root.log
 #server:
 #  servlet:
 #    context-path: /helloboot

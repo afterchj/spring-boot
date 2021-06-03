@@ -10,7 +10,7 @@ public class UserVo {
     private String company;
     private String password;
     private String telephone;
-    private boolean isAdmin;
+    private Boolean isAdmin;
 
     public UserVo() {
         super();
