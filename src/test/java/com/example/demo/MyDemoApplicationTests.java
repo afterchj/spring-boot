@@ -17,10 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,10 +49,25 @@ public class MyDemoApplicationTests {
     @Autowired
     private UserService userService;
 
-
-
     @Autowired
     private MailUtil mailUtil;
+
+    @Test
+    public void testLock() throws InterruptedException {
+        String key = String.format("%s:%s", "redis_lock", "1001");
+        long expire = 2000;
+        long curTime = LocalDateTime.now().toInstant(ZoneOffset.of("+8")).toEpochMilli() + expire;
+        boolean flag = redisDao.setIfAbsent(key, String.valueOf(curTime), expire);
+        System.out.println("flag=" + flag);
+        Thread.sleep(1000);
+        long expireTime = Long.parseLong(redisDao.getValue(key));
+        System.out.println("expireTime=" + expireTime);
+        long currentTime = LocalDateTime.now().toInstant(ZoneOffset.ofHours(8)).toEpochMilli();
+        long leftTime = redisDao.getExpire(key, TimeUnit.MILLISECONDS);
+        Duration duration = Duration.between(LocalDateTime.now(), LocalDateTime.now().plus(leftTime, ChronoUnit.MILLIS));
+        System.out.println("duration=" + duration.getSeconds());
+        System.out.println("isExpire=" + (expireTime >= currentTime) + ",value=" + expireTime + ",leftTime = " + leftTime);
+    }
 
     private MailBO mailBean = new MailBO();
 
