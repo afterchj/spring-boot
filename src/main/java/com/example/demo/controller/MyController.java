@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.entity.ConfigBean;
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserProperty;
 import com.example.demo.entity.UserVo;
 import com.example.demo.service.UserService;
 import com.github.pagehelper.PageInfo;
@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @RestController
-@EnableConfigurationProperties({ConfigBean.class, User.class})
+@EnableConfigurationProperties({ConfigBean.class, UserProperty.class})
 public class MyController {
 
     @Autowired
@@ -33,11 +33,11 @@ public class MyController {
     }
 
     @Autowired
-    private User user;
+    private UserProperty userProperty;
 
     @RequestMapping("/user")
     public String user() {
-        return user.getName() + ":" + user.getAge();
+        return userProperty.getName() + ":" + userProperty.getAge();
     }
 
     @RequestMapping(value = "/userList")

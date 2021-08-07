@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserProperty;
 import com.example.demo.utils.SpringUtil;
 import org.junit.Test;
 

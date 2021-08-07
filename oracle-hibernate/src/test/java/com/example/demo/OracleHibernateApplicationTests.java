@@ -5,7 +5,7 @@ import com.example.demo.dao.BasClassDao;
 import com.example.demo.dao.StudentDao;
 import com.example.demo.entity.BasClass;
 import com.example.demo.entity.Student;
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserProperty;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

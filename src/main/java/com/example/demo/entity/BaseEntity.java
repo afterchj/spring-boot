@@ -1,11 +1,9 @@
 package com.example.demo.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -22,15 +20,23 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 20)
+    @ApiModelProperty(value = "创建者")
+    private Long createBy;
+
+
+    @ApiModelProperty(value = "更新者")
+    private Long updateBy;
+
+
+    @ApiModelProperty(value = "部门状态（0正常 1停用）")
+    private Integer status;
+
+    @ApiModelProperty(value = "删除标志（0代表存在 2代表删除）")
+    private Integer isDeleted;
+
     private LocalDateTime createTime = LocalDateTime.now();
 
     private LocalDateTime updateTime = LocalDateTime.now();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

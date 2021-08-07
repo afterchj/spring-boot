@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.User;
+import com.example.demo.entity.UserProperty;
 
 /**
  * Created by after on 2019/6/13.

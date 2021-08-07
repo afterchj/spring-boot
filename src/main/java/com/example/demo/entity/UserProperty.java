@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
 @Configuration
 @PropertySource("classpath:test.properties")
 @ConfigurationProperties(prefix = "com.example")
-public class User {
+public class UserProperty {
     private String name;
     private int age;
 
