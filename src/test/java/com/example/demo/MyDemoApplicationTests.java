@@ -2,10 +2,14 @@ package com.example.demo;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.example.demo.dao.CardRepository;
 import com.example.demo.dao.RedisDao;
 import com.example.demo.dao.UserDao;
+import com.example.demo.dao.UserRepository;
 import com.example.demo.entity.UserVo;
 import com.example.demo.entity.bo.MailBO;
+import com.example.demo.entity.model.IDCard;
+import com.example.demo.entity.model.User;
 import com.example.demo.service.UserService;
 import com.example.demo.util.MailUtil;
 import org.junit.Before;
@@ -50,7 +54,34 @@ public class MyDemoApplicationTests {
     private UserService userService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private CardRepository cardRepository;
+
+    @Autowired
     private MailUtil mailUtil;
+
+    @Test
+    public void testUserRep() {
+        User user = new User();
+        user.setAccount("test003");
+        user.setUsername("测试3");
+        IDCard card = new IDCard();
+        card.setNo("363735XXX");
+
+        User u = userRepository.findByAccount("test001");
+        System.out.println(JSON.toJSONString(u));
+//        user.setIdCard(card);
+//        card.setUser(user);
+//        cardRepository.save(card);
+//        IDCard idCard = cardRepository.findById(2l).get();
+//        idCard.setNo("361735XXX");
+//        cardRepository.save(idCard);
+//        u.setIdCard(idCard);
+//        userRepository.save(u);
+    }
+
 
     @Test
     public void testLock() throws InterruptedException {

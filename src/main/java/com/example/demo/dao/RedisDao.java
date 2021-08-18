@@ -39,8 +39,7 @@ public class RedisDao {
     }
 
     public boolean setIfAbsent(String key, String expire, long expireTime) {
-        Boolean flag = redisTemplate.opsForValue().setIfAbsent(key, expire, expireTime, TimeUnit.MILLISECONDS);
-        return flag;
+        return redisTemplate.opsForValue().setIfAbsent(key, expire, expireTime, TimeUnit.MILLISECONDS);
     }
 }
 
