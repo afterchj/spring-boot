@@ -19,9 +19,9 @@ import java.util.Set;
  */
 @Data
 @Entity
-@Table(name ="core_menu")
+@Table(name = "core_menu")
 @EqualsAndHashCode(callSuper = true)
-@ApiModel(value="Menu对象", description="菜单权限表")
+@ApiModel(value = "Menu对象", description = "菜单权限表")
 public class Menu extends BaseEntity {
 
     @ApiModelProperty(value = "菜单名称")
@@ -56,11 +56,6 @@ public class Menu extends BaseEntity {
 
     @ApiModelProperty(value = "备注")
     private String remark;
-
-    @OneToMany(mappedBy = "menu",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    //级联保存、更新、删除、刷新;延迟加载。当删除用户，会级联删除该用户的所有文章
-    //拥有mappedBy注解的实体类为关系被维护端
-    private Set<Permission> perms;
 
 
 }

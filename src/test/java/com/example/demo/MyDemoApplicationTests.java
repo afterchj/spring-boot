@@ -70,12 +70,17 @@ public class MyDemoApplicationTests {
         IDCard card = new IDCard();
         card.setNo("363735XXX");
 
-        User u = userRepository.findByAccount("test001");
+//        System.out.println(JSON.toJSONString(user));
+
+//        User u = userRepository.findByAccount("test001");
+        User u = userRepository.findById(3l).get();
         System.out.println(JSON.toJSONString(u));
+//        System.out.println("username="+u.getUsername());
 //        user.setIdCard(card);
 //        card.setUser(user);
 //        cardRepository.save(card);
-//        IDCard idCard = cardRepository.findById(2l).get();
+        IDCard idCard = cardRepository.findById(3l).get();
+        System.out.println(JSON.toJSONString(idCard));
 //        idCard.setNo("361735XXX");
 //        cardRepository.save(idCard);
 //        u.setIdCard(idCard);

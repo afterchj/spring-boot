@@ -29,11 +29,12 @@ public class Role extends BaseEntity {
 
     private String remark;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "role_permission", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "perm_id", referencedColumnName = "id")})
+    @ManyToMany
+    @JoinTable(name = "core_role_permission", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "perm_id", referencedColumnName = "id")})
     private Set<Permission> perms;
+
+    @ManyToMany
+    @JoinTable(name = "core_role_menu", joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "menu_id", referencedColumnName = "id")})
+    private Set<Menu> menus;
 
 }

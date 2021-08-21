@@ -35,9 +35,9 @@ public class Post extends BaseEntity {
 
     @ApiModelProperty(value = "创建者")
     private Long createBy;
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<User> users;
+//
+//    @OneToMany(mappedBy = "post")
+//    private Set<User> users;
 
 
 }

@@ -44,8 +44,8 @@ public class Dept extends BaseEntity {
 
     @ApiModelProperty(value = "邮箱")
     private String email;
-
-    @OneToMany(mappedBy = "dept", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<User> users;
+//
+//    @OneToMany(mappedBy = "dept")
+//    private Set<User> users;
 
 }

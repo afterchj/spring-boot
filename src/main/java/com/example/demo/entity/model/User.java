@@ -43,22 +43,16 @@ public class User extends BaseEntity {
 
     private String deptName;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @ManyToMany
+    @JoinTable(name = "core_user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "dept_id")
     private Dept dept;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, optional = false,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "post_id")
     private Post post;
-
-    /**
-     * 有IDCard的user字段来维护关系
-     */
-    @OneToOne(mappedBy = "user",cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
-    private IDCard idCard;
 
 }

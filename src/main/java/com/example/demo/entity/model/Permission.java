@@ -30,11 +30,4 @@ public class Permission extends BaseEntity {
 
     private String remark;
 
-    @ManyToMany(mappedBy = "perms")
-    private Set<Role> roles;
-
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH}, optional = false)
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
-
 }
