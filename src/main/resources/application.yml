@@ -27,3 +27,14 @@ logging:
 #  servlet:
 #    context-path: /helloboot
 #debug: true
+# 线程池配置
+thread:
+  pool:
+    # 核心线程数
+    core-pool-size: 8
+    # 最大线程数
+    max-pool-size: 16
+    # 工作队列容量
+    queue-capacity: 100
+    # 线程池维护线程所允许的空闲时间
+    keep-alive-seconds: 300
